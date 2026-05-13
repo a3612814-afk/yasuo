@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Admin dashboard for image compression tool">
+    <meta name="keywords" content="admin, dashboard, analytics, image compression">
+    <title data-i18n="admin.dashboard.title">Admin Dashboard - Image Compressor</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #f5f6f8;
+            color: #1a1a1a;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+        }
+
+        .sidebar {
+            width: 240px;
+            background: #fff;
+            border-right: 1px solid #e5e5e5;
+            padding: 24px 0;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            padding: 0 24px 24px;
+            border-bottom: 1px solid #e5e5e5;
+            margin-bottom: 24px;
+        }
+
+        .logo span { color: #2563eb; }
+
+        .nav-section { margin-bottom: 24px; }
+        .nav-title {
+            font-size: 11px;
+            font-weight: 600;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 0 24px;
+            margin-bottom: 8px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 24px;
+            font-size: 14px;
+            color: #666;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .nav-item:hover { background: #f5f6f8; color: #1a1a1a; }
+        .nav-item.active { background: #f0f4ff; color: #2563eb; font-weight: 500; }
+        .nav-item svg { width: 20px; height: 20px; stroke: currentColor; }
+
+        .main {
+            flex: 1;
+            margin-left: 240px;
+            padding: 24px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .header h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .user-info { display: flex; align-items: center; gap: 16px; }
+
+        .lang-switcher {
+            display: flex;
+            gap: 8px;
+        }
+
+        .lang-btn {
+            padding: 6px 12px;
+            border: 1px solid #e5e5e5;
+            background: #fff;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.2s;
+        }
+
+        .lang-btn:hover {
+            border-color: #2563eb;
+            color: #2563eb;
+        }
+
+        .lang-btn.active {
+            background: #2563eb;
+            color: #fff;
+            border-color: #2563eb;
+        }
+
+        .avatar {
+            width: 36px; height: 36px; background: #2563eb; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: #fff; font-weight: 600; font-size: 14px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 24px;
+        }
+
+        .stat-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+        }
+
+        .stat-label { font-size: 13px; color: #666; margin-bottom: 8px; }
+        .stat-value { font-family: 'Space Grotesk', sans-serif; font-size: 32px; font-weight: 700; }
+        .stat-change { font-size: 13px; margin-top: 4px; }
+        .stat-change.up { color: #22c55e; }
+        .stat-change.down { color: #ef4444; }
+
+        .chart-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+        }
+
+        .chart-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+        .chart-title { font-size: 16px; font-weight: 600; }
+        .chart-placeholder {
+            height: 280px;
+            background: linear-gradient(180deg, #f5f6f8 0%, #fff 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            padding: 20px;
+        }
+
+        .bar {
+            width: 40px;
+            background: linear-gradient(180deg, #2563eb 0%, #3b82f6 100%);
+            border-radius: 4px 4px 0 0;
+            transition: height 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .bar-label { margin-top: 8px; font-size: 12px; color: #666; }
+
+        .table-card {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+        }
+
+        .table-header { padding: 20px 24px; border-bottom: 1px solid #e5e5e5; font-size: 16px; font-weight: 600; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 14px 24px; text-align: left; font-size: 14px; }
+        th { background: #f9fafb; font-weight: 500; color: #666; }
+        td { border-top: 1px solid #e5e5e5; }
+
+        .status {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        .status.active { background: #dcfce7; color: #16a34a; }
+
+        @media (max-width: 1200px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 768px) { .sidebar { display: none; } .main { margin-left: 0; } }
+    </style>
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="logo">图<span>压缩</span> Admin</div>
+        <div class="nav-section">
+            <div class="nav-title" data-i18n="admin.nav.dataCenter">Data Center</div>
+            <a href="dashboard.html" class="nav-item active">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" />
+                </svg>
+                <span data-i18n="admin.nav.overview">Overview</span>
+            </a>
+        </div>
+        <div class="nav-section">
+            <div class="nav-title" data-i18n="admin.nav.blogCenter">Blog Center</div>
+            <a href="blog-list.html" class="nav-item">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                </svg>
+                <span data-i18n="admin.nav.articles">Articles</span>
+            </a>
+            <a href="blog-edit.html" class="nav-item">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" />
+                </svg>
+                <span data-i18n="admin.nav.newArticle">New Article</span>
+            </a>
+        </div>
+        <div class="nav-section">
+            <div class="nav-title" data-i18n="admin.nav.system">System</div>
+            <a href="settings.html" class="nav-item">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                <span data-i18n="admin.nav.settings">Settings</span>
+            </a>
+            <div class="nav-item" id="logoutBtn">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25V9" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                </svg>
+                <span data-i18n="admin.nav.logout">Logout</span>
+            </div>
+        </div>
+    </aside>
+
+    <main class="main">
+        <div class="header">
+            <h1 data-i18n="admin.dashboard.overview">Overview</h1>
+            <div class="user-info">
+                <div class="lang-switcher">
+                    <button class="lang-btn" id="lang-en" onclick="switchLanguage('en')">EN</button>
+                    <button class="lang-btn" id="lang-zh" onclick="switchLanguage('zh')">中文</button>
+                </div>
+                <span>Admin</span>
+                <div class="avatar">A</div>
+            </div>
+        </div>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label" data-i18n="admin.dashboard.todayViews">Today's Views</div>
+                <div class="stat-value" id="statViews">1,284</div>
+                <div class="stat-change up" data-i18n="admin.dashboard.up12">+12.5% from yesterday</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label" data-i18n="admin.dashboard.todayVisitors">Today's Visitors</div>
+                <div class="stat-value" id="statVisitors">326</div>
+                <div class="stat-change up" data-i18n="admin.dashboard.up8">+8.3% from yesterday</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label" data-i18n="admin.dashboard.avgTime">Avg. Time on Site</div>
+                <div class="stat-value" id="statTime">2:34</div>
+                <div class="stat-change up" data-i18n="admin.dashboard.up15">+15.2% from yesterday</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label" data-i18n="admin.dashboard.totalArticles">Total Articles</div>
+                <div class="stat-value" id="statPosts">5</div>
+                <div class="stat-change up" data-i18n="admin.dashboard.ongoing">Ongoing Updates</div>
+            </div>
+        </div>
+        <div class="chart-card">
+            <div class="chart-header">
+                <div class="chart-title" data-i18n="admin.dashboard.viewTrends">7-Day View Trends</div>
+            </div>
+            <div class="chart-placeholder" id="chart"></div>
+        </div>
+        <div class="table-card">
+            <div class="table-header" data-i18n="admin.dashboard.pageRanking">Page Visit Ranking</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th data-i18n="admin.dashboard.page">Page</th>
+                        <th data-i18n="admin.dashboard.views">Views</th>
+                        <th data-i18n="admin.dashboard.visitors">Visitors</th>
+                        <th data-i18n="admin.dashboard.avgTime">Avg. Time</th>
+                        <th data-i18n="admin.dashboard.status">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>/index.html</td>
+                        <td>892</td>
+                        <td>245</td>
+                        <td>1:45</td>
+                        <td><span class="status active" data-i18n="admin.dashboard.normal">Normal</span></td>
+                    </tr>
+                    <tr>
+                        <td>/blog.html</td>
+                        <td>523</td>
+                        <td>178</td>
+                        <td>3:22</td>
+                        <td><span class="status active" data-i18n="admin.dashboard.normal">Normal</span></td>
+                    </tr>
+                    <tr>
+                        <td>/help.html</td>
+                        <td>156</td>
+                        <td>89</td>
+                        <td>2:18</td>
+                        <td><span class="status active" data-i18n="admin.dashboard.normal">Normal</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <script src="../js/storage.js"></script>
+    <script src="../js/i18n.js"></script>
+    <script>
+        function switchLanguage(lang) {
+            setLanguage(lang);
+            translatePage();
+            updateLangButtons();
+        }
+
+        function updateLangButtons() {
+            const currentLang = getLanguage();
+            document.getElementById('lang-en').classList.toggle('active', currentLang === 'en');
+            document.getElementById('lang-zh').classList.toggle('active', currentLang === 'zh');
+            document.documentElement.lang = currentLang === 'zh' ? 'zh-CN' : 'en';
+        }
+
+        if (!Storage.isLoggedIn()) window.location.href = 'login.html';
+
+        function loadDashboard() {
+            const analytics = Storage.getAnalytics();
+            const posts = Storage.getPosts();
+            
+            document.getElementById('statViews').textContent = analytics.todayViews.toLocaleString();
+            document.getElementById('statVisitors').textContent = analytics.todayVisitors.toLocaleString();
+            document.getElementById('statTime').textContent = analytics.avgTimeOnSite;
+            document.getElementById('statPosts').textContent = posts.length;
+            
+            const chart = document.getElementById('chart');
+            const maxViews = Math.max(...analytics.recentDays.map(d => d.views));
+            chart.innerHTML = analytics.recentDays.map(day => {
+                const height = (day.views / maxViews) * 100;
+                return `<div class="bar" style="height: ${height}%"><div class="bar-label">${day.date}</div></div>`;
+            }).join('');
+        }
+
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            const lang = getLanguage();
+            if (confirm(lang === 'zh' ? '确定要退出登录吗？' : 'Are you sure you want to logout?')) {
+                Storage.logout();
+                window.location.href = 'login.html';
+            }
+        });
+
+        loadDashboard();
+        initLanguage();
+        updateLangButtons();
+    </script>
+</body>
+</html>
