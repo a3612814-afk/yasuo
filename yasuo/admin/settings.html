@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="系统设置">
+    <meta name="keywords" content="系统设置, 图片压缩">
+    <title>系统设置 - 图片压缩工具</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background: #f5f6f8;
+            color: #1a1a1a;
+            min-height: 100vh;
+            display: flex;
+        }
+        .sidebar {
+            width: 240px;
+            background: #fff;
+            border-right: 1px solid #e5e5e5;
+            padding: 24px 0;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+        .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            padding: 0 24px 24px;
+            border-bottom: 1px solid #e5e5e5;
+            margin-bottom: 24px;
+        }
+        .logo span { color: #2563eb; }
+        .nav-section { margin-bottom: 24px; }
+        .nav-title {
+            font-size: 11px;
+            font-weight: 600;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 0 24px;
+            margin-bottom: 8px;
+        }
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 24px;
+            font-size: 14px;
+            color: #666;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+        .nav-item:hover { background: #f5f6f8; color: #1a1a1a; }
+        .nav-item.active { background: #f0f4ff; color: #2563eb; font-weight: 500; }
+        .nav-item svg { width: 20px; height: 20px; stroke: currentColor; }
+        .main {
+            flex: 1;
+            margin-left: 240px;
+            padding: 24px;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+        .header h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+        }
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-primary { background: #2563eb; color: #fff; }
+        .btn-primary:hover { background: #1d4ed8; }
+        .btn-danger { background: #dc2626; color: #fff; }
+        .btn-danger:hover { background: #b91c1c; }
+        .card {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+            margin-bottom: 24px;
+        }
+        .card-header {
+            padding: 16px 24px;
+            border-bottom: 1px solid #e5e5e5;
+            font-weight: 600;
+        }
+        .card-body { padding: 24px; }
+        .form-group { margin-bottom: 20px; }
+        .form-group:last-child { margin-bottom: 0; }
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid #e5e5e5;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: border-color 0.2s;
+        }
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        .link-item {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px;
+            align-items: center;
+        }
+        .link-item input { flex: 1; }
+        .link-item button {
+            padding: 8px 12px;
+            border: 1px solid #fecaca;
+            background: #fee2e2;
+            color: #dc2626;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .link-item button:hover { background: #fecaca; }
+        .add-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            border: 1px dashed #e5e5e5;
+            background: transparent;
+            color: #666;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 12px;
+        }
+        .add-btn:hover { border-color: #2563eb; color: #2563eb; }
+        .danger-zone {
+            border: 2px solid #fecaca;
+        }
+        .danger-zone .card-header {
+            color: #dc2626;
+        }
+        .actions {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+        }
+        @media (max-width: 768px) {
+            .sidebar { display: none; }
+            .main { margin-left: 0; }
+            .form-row { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="logo">图<span>压缩</span> Admin</div>
+        <div class="nav-section">
+            <div class="nav-title">数据中心</div>
+            <a href="dashboard.html" class="nav-item">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" />
+                </svg>
+                <span>概览</span>
+            </a>
+        </div>
+        <div class="nav-section">
+            <div class="nav-title">博客中心</div>
+            <a href="blog-list.html" class="nav-item">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                </svg>
+                <span>文章管理</span>
+            </a>
+            <a href="blog-edit.html" class="nav-item">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" />
+                </svg>
+                <span>新建文章</span>
+            </a>
+        </div>
+        <div class="nav-section">
+            <div class="nav-title">系统</div>
+            <a href="settings.html" class="nav-item active">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                <span>设置</span>
+            </a>
+            <div class="nav-item" id="logoutBtn">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25V9" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                </svg>
+                <span>退出登录</span>
+            </div>
+        </div>
+    </aside>
+
+    <main class="main">
+        <div class="header">
+            <h1>系统设置</h1>
+        </div>
+
+        <div class="card">
+            <div class="card-header">基本信息</div>
+            <div class="card-body">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>网站名称</label>
+                        <input type="text" id="siteName" placeholder="网站名称">
+                    </div>
+                    <div class="form-group">
+                        <label>网站地址</label>
+                        <input type="text" id="siteUrl" placeholder="https://example.com">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>网站描述</label>
+                    <textarea id="siteDesc" rows="3" placeholder="网站描述，用于SEO"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">友情链接</div>
+            <div class="card-body">
+                <div id="linksContainer"></div>
+                <button type="button" class="add-btn" onclick="addLink()">+ 添加链接</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">账户安全</div>
+            <div class="card-body">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>当前用户名</label>
+                        <input type="text" value="admin" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label>新密码</label>
+                        <input type="password" id="newPassword" placeholder="留空则不修改">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="actions">
+            <button type="button" class="btn btn-primary" onclick="saveSettings()">保存设置</button>
+        </div>
+
+        <div class="card danger-zone">
+            <div class="card-header">危险区域</div>
+            <div class="card-body">
+                <p style="color: #666; margin-bottom: 16px;">警告：此操作将删除所有自定义数据，恢复到初始状态。</p>
+            </div>
+            <div class="actions" style="padding: 0 24px 24px;">
+                <button type="button" class="btn btn-danger" onclick="resetData()">重置所有数据</button>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/storage.js"></script>
+    <script>
+        if (!Storage.isLoggedIn()) window.location.href = 'login.html';
+
+        function loadSettings() {
+            const settings = Storage.getSettings();
+            document.getElementById('siteName').value = settings.siteName || '';
+            document.getElementById('siteUrl').value = settings.siteUrl || '';
+            document.getElementById('siteDesc').value = settings.siteDesc || '';
+            renderLinks(settings.friendLinks || []);
+        }
+
+        function renderLinks(links) {
+            const container = document.getElementById('linksContainer');
+            if (links.length === 0) {
+                container.innerHTML = '<p style="color: #999; font-size: 14px;">暂无链接</p>';
+                return;
+            }
+            container.innerHTML = links.map((link, index) => `
+                <div class="link-item">
+                    <input type="text" value="${link.name}" placeholder="链接名称" onchange="updateLink(${index}, 'name', this.value)">
+                    <input type="text" value="${link.url}" placeholder="https://example.com" onchange="updateLink(${index}, 'url', this.value)">
+                    <button type="button" onclick="removeLink(${index})">删除</button>
+                </div>
+            `).join('');
+        }
+
+        let currentLinks = [];
+
+        function addLink() {
+            currentLinks.push({ name: '', url: '' });
+            renderLinks(currentLinks);
+        }
+
+        function removeLink(index) {
+            currentLinks.splice(index, 1);
+            renderLinks(currentLinks);
+        }
+
+        function updateLink(index, field, value) {
+            currentLinks[index][field] = value;
+        }
+
+        function saveSettings() {
+            const settings = Storage.getSettings();
+            settings.siteName = document.getElementById('siteName').value;
+            settings.siteUrl = document.getElementById('siteUrl').value;
+            settings.siteDesc = document.getElementById('siteDesc').value;
+            settings.friendLinks = currentLinks.filter(l => l.name && l.url);
+            
+            const newPassword = document.getElementById('newPassword').value;
+            if (newPassword) {
+                const data = Storage.getData();
+                data.user.password = newPassword;
+                Storage.setData(data);
+            }
+            
+            Storage.saveSettings(settings);
+            alert('设置保存成功！');
+        }
+
+        function resetData() {
+            if (confirm('确定要重置所有数据吗？这将删除所有文章和设置，恢复到初始状态。')) {
+                Storage.resetData();
+                alert('数据已重置！');
+                window.location.reload();
+            }
+        }
+
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            if (confirm('确定要退出登录吗？')) {
+                Storage.logout();
+                window.location.href = 'login.html';
+            }
+        });
+
+        loadSettings();
+    </script>
+</body>
+</html>
