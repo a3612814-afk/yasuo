@@ -30,6 +30,13 @@
         .article-item .meta { color: #64748b; margin-left: 12px; white-space: nowrap; }
         .article-item .del-btn { background: none; border: none; color: #ef4444; cursor: pointer; margin-left: 8px; font-size: 16px; }
         .article-item .del-btn:hover { color: #fca5a5; }
+        .login-overlay { position: fixed; inset: 0; background: #0f172a; display: flex; align-items: center; justify-content: center; z-index: 1000; }
+        .login-box { background: #1e293b; padding: 40px; border-radius: 16px; border: 1px solid #334155; width: 100%; max-width: 360px; text-align: center; }
+        .login-box h2 { margin-bottom: 8px; color: #60a5fa; }
+        .login-box p { color: #64748b; font-size: 14px; margin-bottom: 24px; }
+        .login-box input { width: 100%; padding: 12px 16px; background: #0f172a; border: 1px solid #475569; border-radius: 8px; color: #e2e8f0; font-size: 16px; margin-bottom: 16px; }
+        .login-box input:focus { outline: none; border-color: #3b82f6; }
+        .login-box .error { color: #ef4444; font-size: 13px; margin-top: -8px; margin-bottom: 12px; display: none; }
         .stats { display: flex; gap: 16px; margin-bottom: 16px; }
         .stat { background: #0f172a; padding: 12px 20px; border-radius: 8px; text-align: center; }
         .stat .num { font-size: 28px; font-weight: 700; color: #60a5fa; }
@@ -39,6 +46,15 @@
     </style>
 </head>
 <body>
+    <div class="login-overlay" id="loginOverlay">
+        <div class="login-box">
+            <h2>🔒 管理员登录</h2>
+            <p>请输入密码进入博客导入页面</p>
+            <input type="password" id="pwdInput" placeholder="密码" onkeydown="if(event.key==='Enter')checkPwd()">
+            <div class="error" id="pwdError">密码错误</div>
+            <button class="btn-primary" style="width:100%" onclick="checkPwd()">进入</button>
+        </div>
+    </div>
     <h1>📝 博客一键导入</h1>
     <p class="subtitle">导入文章到 SimpleCompression 博客系统（存储在浏览器 localStorage）</p>
 
@@ -78,6 +94,18 @@
 
     <script src="js/storage.js"></script>
     <script>
+        const ADMIN_PWD = 'yasuo2026'; // 修改这里更改密码
+
+        function checkPwd() {
+            const input = document.getElementById('pwdInput').value;
+            if (input === ADMIN_PWD) {
+                document.getElementById('loginOverlay').style.display = 'none';
+            } else {
+                document.getElementById('pwdError').style.display = 'block';
+                document.getElementById('pwdInput').value = '';
+            }
+        }
+
         function showMsg(text, type) {
             const el = document.getElementById('msg');
             el.textContent = text;
