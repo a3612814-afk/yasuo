@@ -63,6 +63,7 @@
 ]'></textarea>
         <div class="btn-row">
             <button class="btn-primary" onclick="importArticles()">📥 一键导入</button>
+            <button class="btn-primary" onclick="importFromBlogsJson()">📦 从 blogs.json 导入</button>
             <button class="btn-secondary" onclick="loadSample()">📋 加载示例</button>
             <button class="btn-danger" onclick="clearAll()">🗑️ 清空全部</button>
             <button class="btn-secondary" onclick="exportData()">📤 导出</button>
@@ -194,6 +195,32 @@
             const a = document.createElement('a');
             a.href = url; a.download = 'blog-export.json'; a.click();
             URL.revokeObjectURL(url);
+        }
+
+        async function importFromBlogsJson() {
+            try {
+                const resp = await fetch('blogs.json');
+                if (!resp.ok) throw new Error('blogs.json 加载失败');
+                const data = await resp.json();
+                const posts = data.posts || [];
+                if (posts.length === 0) { showMsg('blogs.json 中没有文章', 'error'); return; }
+                // Convert bilingual to flat strings based on current lang
+                const lang = localStorage.getItem('language') || 'en';
+                const flat = posts.map((p, i) => ({
+                    id: String(p.id || Date.now() + i),
+                    title: typeof p.title === 'object' ? (p.title[lang] || p.title.en || '') : p.title,
+                    excerpt: typeof p.excerpt === 'object' ? (p.excerpt[lang] || p.excerpt.en || '') : p.excerpt,
+                    content: typeof p.content === 'object' ? (p.content[lang] || p.content.en || '') : p.content,
+                    tags: typeof p.tags === 'object' ? (p.tags[lang] || p.tags.en || []) : p.tags,
+                    category: p.category || 'seo',
+                    status: p.status || 'published',
+                    createdAt: p.createdAt || new Date().toISOString()
+                }));
+                document.getElementById('importData').value = JSON.stringify(flat, null, 2);
+                showMsg(`✅ 已加载 ${flat.length} 篇文章，点击「一键导入」写入`, 'success');
+            } catch (e) {
+                showMsg('❌ ' + e.message, 'error');
+            }
         }
 
         function loadSample() {
