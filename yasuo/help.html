@@ -3,17 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Compressor - Free Online Image Compressor Tool</title>
-    <meta name="description" content="Free online image compressor - compress JPG, PNG, WebP images without losing quality. Fast, secure, and privacy-friendly local processing.">
-    <meta name="keywords" content="image compressor, online image compressor, image compressor online, online image compressor tool, jpg image compressor, tinypng image compressor, free image compressor">
+    <title>Help Center - Image Compressor</title>
+    <meta name="description" content="Frequently asked questions and user guide for Image Compressor.">
+    <meta name="keywords" content="help, FAQ, user guide, image compression">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="help.html">
-    <meta property="og:title" content="Image Compressor - Free Online Image Compressor Tool">
-    <meta property="og:description" content="Free online image compressor - compress JPG, PNG, WebP images without losing quality. Fast, secure, and privacy-friendly local processing.">
-    <meta property="og:type" content="website">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Image Compressor - Free Online Image Compressor Tool">
-    <meta name="twitter:description" content="Free online image compressor - compress JPG, PNG, WebP images without losing quality.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
@@ -30,9 +23,15 @@
             --radius: 12px;
             --shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03);
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: 'Space Grotesk', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
             background: var(--bg-primary);
             color: var(--text-primary);
             line-height: 1.6;
@@ -40,6 +39,7 @@
             display: flex;
             flex-direction: column;
         }
+
         nav {
             position: sticky;
             top: 0;
@@ -48,343 +48,370 @@
             border-bottom: 1px solid var(--border);
             z-index: 100;
         }
+
         .nav-inner {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 16px 24px;
+            padding: 0 24px;
+            height: 64px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
         }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
         .logo {
             font-family: 'Space Grotesk', sans-serif;
             font-size: 20px;
             font-weight: 700;
-            text-decoration: none;
             color: var(--text-primary);
+            text-decoration: none;
+            letter-spacing: -0.5px;
         }
-        .logo span { color: var(--accent); }
-        .nav-links { display: flex; gap: 24px; list-style: none; }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
         .nav-links a {
+            font-size: 15px;
+            font-weight: 500;
             color: var(--text-secondary);
             text-decoration: none;
-            font-weight: 500;
-            transition: color 0.2s;
+            transition: color 0.2s ease;
         }
-        .nav-links a:hover { color: var(--accent); }
-        .language-switch { display: flex; gap: 8px; }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--accent);
+        }
+
+        .lang-switcher {
+            display: flex;
+            gap: 4px;
+            background: var(--bg-primary);
+            padding: 4px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
         .lang-btn {
             padding: 6px 12px;
-            border: 1px solid var(--border);
-            border-radius: 6px;
+            border: none;
             background: transparent;
-            cursor: pointer;
             font-size: 14px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            cursor: pointer;
+            border-radius: 6px;
             transition: all 0.2s;
         }
-        .lang-btn:hover { border-color: var(--accent); }
+
+        .lang-btn:hover {
+            color: var(--text-primary);
+        }
+
         .lang-btn.active {
             background: var(--accent);
             color: white;
-            border-color: var(--accent);
         }
+
         main {
             flex: 1;
             max-width: 800px;
             margin: 0 auto;
-            padding: 48px 24px;
+            padding: 64px 24px;
+            width: 100%;
         }
-        .page-header { margin-bottom: 48px; }
+
+        .page-header {
+            margin-bottom: 48px;
+        }
+
         .page-header h1 {
+            font-family: 'Space Grotesk', sans-serif;
             font-size: 36px;
-            margin-bottom: 12px;
-            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin-bottom: 8px;
         }
-        .page-header p { color: var(--text-secondary); }
-        .faq-section { margin-bottom: 48px; }
-        .faq-section h2 {
-            font-size: 24px;
-            margin-bottom: 24px;
-            font-family: 'Space Grotesk', sans-serif;
+
+        .page-header p {
+            color: var(--text-secondary);
         }
+
+        .faq-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
         .faq-item {
             background: var(--bg-secondary);
             border-radius: var(--radius);
-            margin-bottom: 16px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-        }
-        .faq-question {
-            padding: 20px 24px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: 500;
-            transition: background 0.2s;
-        }
-        .faq-question:hover { background: #f9fafb; }
-        .faq-question::after {
-            content: '+';
-            font-size: 20px;
-            color: var(--accent);
-            transition: transform 0.2s;
-        }
-        .faq-item.active .faq-question::after {
-            transform: rotate(45deg);
-        }
-        .faq-answer {
-            padding: 0 24px;
-            max-height: 0;
-            overflow: hidden;
-            transition: all 0.2s;
-            color: var(--text-secondary);
-        }
-        .faq-item.active .faq-answer {
-            padding-bottom: 20px;
-            max-height: 500px;
-        }
-        .feature-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 16px;
-            margin-bottom: 48px;
-        }
-        .feature-card {
-            background: var(--bg-secondary);
-            border-radius: var(--radius);
             padding: 24px;
-            text-align: center;
             box-shadow: var(--shadow);
         }
-        .feature-card h3 {
+
+        .faq-item h3 {
             font-size: 16px;
+            font-weight: 600;
             margin-bottom: 8px;
-            font-family: 'Space Grotesk', sans-serif;
+            color: var(--text-primary);
         }
-        .feature-card p {
+
+        .faq-item p {
             font-size: 14px;
             color: var(--text-secondary);
+            line-height: 1.7;
         }
+
         footer {
-            text-align: center;
-            padding: 48px 24px;
-            color: var(--text-muted);
-            font-size: 14px;
+            background: var(--bg-secondary);
             border-top: 1px solid var(--border);
+            padding: 48px 24px;
+            margin-top: auto;
+        }
+
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+
+        .friend-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+
+        .friend-links a {
+            font-size: 14px;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .friend-links a:hover {
+            color: var(--accent);
+        }
+
+        .copyright {
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 640px) {
+            .nav-inner {
+                flex-direction: column;
+                height: auto;
+                padding: 12px 24px;
+                gap: 12px;
+            }
+
+            .nav-left {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .nav-links {
+                gap: 20px;
+            }
+
+            .page-header h1 {
+                font-size: 28px;
+            }
         }
     </style>
+    <script src="js/i18n.js"></script>
+    <script src="js/storage.js"></script>
 </head>
 <body>
     <nav>
         <div class="nav-inner">
-            <div>
-                <a href="index.html" class="logo" id="logoText">Image<span>Compressor</span></a>
+            <div class="nav-left">
+                <a href="index.html" class="logo">Image<span>Compressor</span></a>
                 <ul class="nav-links">
-                    <li><a href="index.html" id="navHome">Home</a></li>
-                    <li><a href="blog.html" id="navBlog">Blog</a></li>
-                    <li><a href="help.html" id="navHelp">Help</a></li>
+                    <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+                    <li><a href="blog.html" data-i18n="nav.blog">Blog</a></li>
+                    <li><a href="help.html" class="active" data-i18n="nav.help">Help</a></li>
                 </ul>
             </div>
-            <div class="language-switch">
-                <button class="lang-btn" id="langEn" onclick="setLanguage('en')">EN</button>
-                <button class="lang-btn" id="langZh" onclick="setLanguage('zh')">中文</button>
+            <div class="lang-switcher">
+                <button class="lang-btn active" data-lang="en">EN</button>
+                <button class="lang-btn" data-lang="zh">中文</button>
             </div>
         </div>
     </nav>
 
     <main>
         <div class="page-header">
-            <h1 id="pageTitle">Help & Support</h1>
-            <p id="pageDesc">Frequently asked questions and support information</p>
+            <h1 data-i18n="help.title">Help Center</h1>
+            <p data-i18n="help.subtitle">Frequently Asked Questions & User Guide</p>
         </div>
 
-        <div class="feature-list">
-            <div class="feature-card">
-                <h3 id="feature1">Free</h3>
-                <p id="feature1Desc">Completely free to use, no limits</p>
-            </div>
-            <div class="feature-card">
-                <h3 id="feature2">Local Processing</h3>
-                <p id="feature2Desc">Images processed in your browser</p>
-            </div>
-            <div class="feature-card">
-                <h3 id="feature3">High Quality</h3>
-                <p id="feature3Desc">Advanced compression algorithms</p>
-            </div>
-            <div class="feature-card">
-                <h3 id="feature4">Multiple Formats</h3>
-                <p id="feature4Desc">JPG, PNG, WebP supported</p>
-            </div>
-        </div>
-
-        <div class="faq-section">
-            <h2 id="faqTitle">FAQ</h2>
-            
-            <div class="faq-item" id="faq1">
-                <div class="faq-question" id="faq1Q">How does image compression work?</div>
-                <div class="faq-answer" id="faq1A">Our tool uses advanced compression algorithms to reduce image file size while maintaining visual quality. Images are processed locally in your browser, so your photos never leave your device.</div>
-            </div>
-            
-            <div class="faq-item" id="faq2">
-                <div class="faq-question" id="faq2Q">What image formats are supported?</div>
-                <div class="faq-answer" id="faq2A">We support JPG, PNG, and WebP formats. You can convert between these formats during compression.</div>
-            </div>
-            
-            <div class="faq-item" id="faq3">
-                <div class="faq-question" id="faq3Q">Is my data secure?</div>
-                <div class="faq-answer" id="faq3A">Yes! All image processing happens locally in your browser. No images are uploaded to our servers, ensuring complete privacy and security.</div>
-            </div>
-            
-            <div class="faq-item" id="faq4">
-                <div class="faq-question" id="faq4Q">Can I compress multiple images at once?</div>
-                <div class="faq-answer" id="faq4A">Currently, we support single image compression. Batch processing feature is coming soon.</div>
-            </div>
-            
-            <div class="faq-item" id="faq5">
-                <div class="faq-question" id="faq5Q">How much can I reduce file size?</div>
-                <div class="faq-answer" id="faq5A">Compression ratio depends on the original image, but typical savings range from 30-70% while maintaining good quality.</div>
-            </div>
-            
-            <div class="faq-item" id="faq6">
-                <div class="faq-question" id="faq6Q">Do I need to download any software?</div>
-                <div class="faq-answer" id="faq6A">No, our tool is entirely web-based. Just open it in your browser and start compressing.</div>
-            </div>
+        <div class="faq-list" id="faqContainer">
         </div>
     </main>
 
     <footer>
-        <p id="copyright">© 2024 Image Compressor. Free online image compressor.</p>
+        <div class="footer-inner">
+            <div class="footer-title" data-i18n="footer.friendLinks">Friend Links</div>
+            <div class="friend-links" id="friendLinksContainer">
+            </div>
+            <div class="copyright" data-i18n="footer.copyright">© 2024 Image Compressor. Free online image compressor.</div>
+        </div>
     </footer>
 
     <script>
-        const translations = {
-            en: {
-                logo: 'Image<span>Compressor</span>',
-                navHome: 'Home',
-                navBlog: 'Blog',
-                navHelp: 'Help',
-                pageTitle: 'Help & Support',
-                pageDesc: 'Frequently asked questions and support information',
-                feature1: 'Free',
-                feature1Desc: 'Completely free to use, no limits',
-                feature2: 'Local Processing',
-                feature2Desc: 'Images processed in your browser',
-                feature3: 'High Quality',
-                feature3Desc: 'Advanced compression algorithms',
-                feature4: 'Multiple Formats',
-                feature4Desc: 'JPG, PNG, WebP supported',
-                faqTitle: 'FAQ',
-                faq1Q: 'How does image compression work?',
-                faq1A: 'Our tool uses advanced compression algorithms to reduce image file size while maintaining visual quality. Images are processed locally in your browser, so your photos never leave your device.',
-                faq2Q: 'What image formats are supported?',
-                faq2A: 'We support JPG, PNG, and WebP formats. You can convert between these formats during compression.',
-                faq3Q: 'Is my data secure?',
-                faq3A: 'Yes! All image processing happens locally in your browser. No images are uploaded to our servers, ensuring complete privacy and security.',
-                faq4Q: 'Can I compress multiple images at once?',
-                faq4A: 'Currently, we support single image compression. Batch processing feature is coming soon.',
-                faq5Q: 'How much can I reduce file size?',
-                faq5A: 'Compression ratio depends on the original image, but typical savings range from 30-70% while maintaining good quality.',
-                faq6Q: 'Do I need to download any software?',
-                faq6A: 'No, our tool is entirely web-based. Just open it in your browser and start compressing.',
-                copyright: '© 2024 Image Compressor. Free online image compressor.'
-            },
-            zh: {
-                logo: '图<span>压缩</span>',
-                navHome: '首页',
-                navBlog: '博客',
-                navHelp: '帮助',
-                pageTitle: '帮助与支持',
-                pageDesc: '常见问题和支持信息',
-                feature1: '免费',
-                feature1Desc: '完全免费使用，无限制',
-                feature2: '本地处理',
-                feature2Desc: '图片在浏览器中处理',
-                feature3: '高质量',
-                feature3Desc: '先进的压缩算法',
-                feature4: '多种格式',
-                feature4Desc: '支持 JPG, PNG, WebP',
-                faqTitle: '常见问题',
-                faq1Q: '图片压缩是如何工作的？',
-                faq1A: '我们的工具使用先进的压缩算法来减小图像文件大小，同时保持视觉质量。图片在您的浏览器本地处理，因此您的照片永远不会离开您的设备。',
-                faq2Q: '支持哪些图片格式？',
-                faq2A: '我们支持 JPG、PNG 和 WebP 格式。您可以在压缩过程中在这些格式之间转换。',
-                faq3Q: '我的数据安全吗？',
-                faq3A: '是的！所有图像处理都在您的浏览器本地进行。没有图片上传到我们的服务器，确保完全的隐私和安全。',
-                faq4Q: '我可以一次压缩多张图片吗？',
-                faq4A: '目前我们支持单张图片压缩。批量处理功能即将推出。',
-                faq5Q: '我可以减少多少文件大小？',
-                faq5A: '压缩比例取决于原始图像，但通常可以节省 30-70%，同时保持良好质量。',
-                faq6Q: '我需要下载任何软件吗？',
-                faq6A: '不需要，我们的工具完全基于网页。只需在浏览器中打开即可开始压缩。',
-                copyright: '© 2024 图片压缩工具. 免费在线图片压缩工具.'
-            }
+        const langBtns = document.querySelectorAll('.lang-btn');
+
+        const faqData = {
+            en: [
+                {
+                    q: "What image formats does Image Compressor support?",
+                    a: "Currently supports JPG, JPEG, PNG, and WebP formats. More formats will be supported in future versions."
+                },
+                {
+                    q: "Will the image quality degrade after compression?",
+                    a: "We try to compress image size while maintaining acceptable quality. You can manually adjust the compression ratio if you need higher quality."
+                },
+                {
+                    q: "Is my image safe? Will it be uploaded to the server?",
+                    a: "Completely safe. All image compression operations are done locally in your browser, and images are never uploaded to any server."
+                },
+                {
+                    q: "Can the compressed images be used commercially?",
+                    a: "Of course. The copyright of the compressed images still belongs to you and can be used for any commercial or non-commercial purposes."
+                },
+                {
+                    q: "Is there an image size limit?",
+                    a: "It is recommended that a single image not exceed 10MB. Images that are too large may cause the browser to slow down."
+                },
+                {
+                    q: "How to get the best compression effect?",
+                    a: "It is recommended to resize the image to the actual use size before compression, which can achieve smaller file size and better display effect."
+                }
+            ],
+            zh: [
+                {
+                    q: "图压缩支持哪些图片格式？",
+                    a: "目前支持 JPG、JPEG、PNG、WebP 等主流图片格式。未来版本将支持更多格式。"
+                },
+                {
+                    q: "图片压缩后画质会变差吗？",
+                    a: "我们会尽量在保持可接受画质的前提下压缩图片体积。如需更高画质，可以手动调整压缩比例。"
+                },
+                {
+                    q: "我的图片安全吗？会不会被上传到服务器？",
+                    a: "完全安全。所有图片压缩操作均在您的浏览器本地完成，图片不会上传到任何服务器。"
+                },
+                {
+                    q: "压缩后的图片可以商用吗？",
+                    a: "当然可以。压缩后的图片版权仍归您所有，可用于任何商业或非商业用途。"
+                },
+                {
+                    q: "有图片大小限制吗？",
+                    a: "单张图片建议不超过 10MB。过大的图片可能会导致浏览器处理变慢。"
+                },
+                {
+                    q: "如何获得最佳的压缩效果？",
+                    a: "建议将图片尺寸调整为实际使用尺寸后再压缩，这样可以获得更小的文件体积和更好的显示效果。"
+                }
+            ]
         };
 
-        function getBrowserLanguage() {
-            const lang = navigator.language || navigator.userLanguage;
-            return lang.startsWith('zh') ? 'zh' : 'en';
+        function initLanguage() {
+            const savedLang = localStorage.getItem('language') || 'en';
+            setLanguage(savedLang);
+            updateLangButtons(savedLang);
+            translatePage();
+            loadFAQ(savedLang);
         }
-
-        function getStoredLanguage() {
-            const stored = localStorage.getItem('language');
-            if (stored) return stored;
-            const detected = getBrowserLanguage();
-            localStorage.setItem('language', detected);
-            return detected;
-        }
-
-        let currentLang = getStoredLanguage();
 
         function setLanguage(lang) {
-            currentLang = lang;
             localStorage.setItem('language', lang);
-            updateUI();
+            document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+            
+            const logo = document.querySelector('.logo');
+            if (lang === 'zh') {
+                logo.innerHTML = '图<span>压缩</span>';
+                document.title = '帮助中心 - 图压缩';
+            } else {
+                logo.innerHTML = 'Image<span>Compressor</span>';
+                document.title = 'Help Center - Image Compressor';
+            }
+            
+            updateLangButtons(lang);
+            translatePage();
+            loadFAQ(lang);
         }
 
-        function updateUI() {
-            const t = translations[currentLang];
-            document.getElementById('logoText').innerHTML = t.logo;
-            document.getElementById('navHome').textContent = t.navHome;
-            document.getElementById('navBlog').textContent = t.navBlog;
-            document.getElementById('navHelp').textContent = t.navHelp;
-            document.getElementById('pageTitle').textContent = t.pageTitle;
-            document.getElementById('pageDesc').textContent = t.pageDesc;
-            document.getElementById('feature1').textContent = t.feature1;
-            document.getElementById('feature1Desc').textContent = t.feature1Desc;
-            document.getElementById('feature2').textContent = t.feature2;
-            document.getElementById('feature2Desc').textContent = t.feature2Desc;
-            document.getElementById('feature3').textContent = t.feature3;
-            document.getElementById('feature3Desc').textContent = t.feature3Desc;
-            document.getElementById('feature4').textContent = t.feature4;
-            document.getElementById('feature4Desc').textContent = t.feature4Desc;
-            document.getElementById('faqTitle').textContent = t.faqTitle;
-            document.getElementById('faq1Q').textContent = t.faq1Q;
-            document.getElementById('faq1A').textContent = t.faq1A;
-            document.getElementById('faq2Q').textContent = t.faq2Q;
-            document.getElementById('faq2A').textContent = t.faq2A;
-            document.getElementById('faq3Q').textContent = t.faq3Q;
-            document.getElementById('faq3A').textContent = t.faq3A;
-            document.getElementById('faq4Q').textContent = t.faq4Q;
-            document.getElementById('faq4A').textContent = t.faq4A;
-            document.getElementById('faq5Q').textContent = t.faq5Q;
-            document.getElementById('faq5A').textContent = t.faq5A;
-            document.getElementById('faq6Q').textContent = t.faq6Q;
-            document.getElementById('faq6A').textContent = t.faq6A;
-            document.getElementById('copyright').textContent = t.copyright;
-            document.getElementById('langEn').classList.toggle('active', currentLang === 'en');
-            document.getElementById('langZh').classList.toggle('active', currentLang === 'zh');
-            document.documentElement.lang = currentLang;
+        function updateLangButtons(lang) {
+            langBtns.forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
         }
 
-        document.querySelectorAll('.faq-question').forEach(question => {
-            question.addEventListener('click', () => {
-                const item = question.parentElement;
-                item.classList.toggle('active');
+        function loadFAQ(lang) {
+            const container = document.getElementById('faqContainer');
+            const faqs = faqData[lang] || faqData.en;
+            
+            container.innerHTML = faqs.map(faq => `
+                <div class="faq-item">
+                    <h3>${faq.q}</h3>
+                    <p>${faq.a}</p>
+                </div>
+            `).join('');
+        }
+
+        langBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                setLanguage(btn.dataset.lang);
             });
         });
 
-        updateUI();
+        function loadFriendLinks() {
+            const container = document.getElementById('friendLinksContainer');
+            const settings = Storage.getSettings();
+            
+            if (!settings.friendLinks || settings.friendLinks.length === 0) {
+                container.innerHTML = '';
+                return;
+            }
+
+            container.innerHTML = settings.friendLinks.map(link => 
+                `<a href="${link.url}" target="_blank">${link.name}</a>`
+            ).join('');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // 记录页面访问
+            Storage.recordPageView();
+            
+            initLanguage();
+            loadFriendLinks();
+        });
     </script>
 </body>
 </html>

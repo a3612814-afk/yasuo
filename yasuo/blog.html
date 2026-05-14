@@ -3,17 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Compressor - Free Online Image Compressor Tool</title>
-    <meta name="description" content="Free online image compressor - compress JPG, PNG, WebP images without losing quality. Fast, secure, and privacy-friendly local processing.">
-    <meta name="keywords" content="image compressor, online image compressor, image compressor online, online image compressor tool, jpg image compressor, tinypng image compressor, free image compressor">
+    <title>Blog - Image Compressor</title>
+    <meta name="description" content="Learn about image compression, website optimization, and web development.">
+    <meta name="keywords" content="image compression, blog, web development, website optimization">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="blog.html">
-    <meta property="og:title" content="Image Compressor - Free Online Image Compressor Tool">
-    <meta property="og:description" content="Free online image compressor - compress JPG, PNG, WebP images without losing quality. Fast, secure, and privacy-friendly local processing.">
-    <meta property="og:type" content="website">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Image Compressor - Free Online Image Compressor Tool">
-    <meta name="twitter:description" content="Free online image compressor - compress JPG, PNG, WebP images without losing quality.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
@@ -30,9 +23,15 @@
             --radius: 12px;
             --shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03);
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: 'Space Grotesk', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
             background: var(--bg-primary);
             color: var(--text-primary);
             line-height: 1.6;
@@ -40,6 +39,7 @@
             display: flex;
             flex-direction: column;
         }
+
         nav {
             position: sticky;
             top: 0;
@@ -48,264 +48,379 @@
             border-bottom: 1px solid var(--border);
             z-index: 100;
         }
+
         .nav-inner {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 16px 24px;
+            padding: 0 24px;
+            height: 64px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
         }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
         .logo {
             font-family: 'Space Grotesk', sans-serif;
             font-size: 20px;
             font-weight: 700;
-            text-decoration: none;
             color: var(--text-primary);
+            text-decoration: none;
+            letter-spacing: -0.5px;
         }
-        .logo span { color: var(--accent); }
-        .nav-links { display: flex; gap: 24px; list-style: none; }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
         .nav-links a {
+            font-size: 15px;
+            font-weight: 500;
             color: var(--text-secondary);
             text-decoration: none;
-            font-weight: 500;
-            transition: color 0.2s;
+            transition: color 0.2s ease;
         }
-        .nav-links a:hover { color: var(--accent); }
-        .language-switch { display: flex; gap: 8px; }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--accent);
+        }
+
+        .lang-switcher {
+            display: flex;
+            gap: 4px;
+            background: var(--bg-primary);
+            padding: 4px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
         .lang-btn {
             padding: 6px 12px;
-            border: 1px solid var(--border);
-            border-radius: 6px;
+            border: none;
             background: transparent;
-            cursor: pointer;
             font-size: 14px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            cursor: pointer;
+            border-radius: 6px;
             transition: all 0.2s;
         }
-        .lang-btn:hover { border-color: var(--accent); }
+
+        .lang-btn:hover {
+            color: var(--text-primary);
+        }
+
         .lang-btn.active {
             background: var(--accent);
             color: white;
-            border-color: var(--accent);
         }
+
         main {
             flex: 1;
             max-width: 800px;
             margin: 0 auto;
-            padding: 48px 24px;
+            padding: 64px 24px;
+            width: 100%;
         }
-        .page-header { margin-bottom: 48px; }
+
+        .page-header {
+            margin-bottom: 48px;
+        }
+
         .page-header h1 {
-            font-size: 36px;
-            margin-bottom: 12px;
             font-family: 'Space Grotesk', sans-serif;
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin-bottom: 8px;
         }
-        .page-header p { color: var(--text-secondary); }
-        .article-list { display: flex; flex-direction: column; gap: 24px; }
-        .article-card {
+
+        .page-header p {
+            color: var(--text-secondary);
+        }
+
+        .articles {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        article {
             background: var(--bg-secondary);
             border-radius: var(--radius);
-            padding: 24px;
+            padding: 32px;
             box-shadow: var(--shadow);
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            cursor: pointer;
         }
-        .article-card:hover {
+
+        article:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.04), 0 12px 24px rgba(0,0,0,0.08);
         }
-        .article-card a { text-decoration: none; color: inherit; }
-        .article-card h2 {
-            font-size: 20px;
-            margin-bottom: 8px;
-            color: var(--text-primary);
-            font-family: 'Space Grotesk', sans-serif;
-        }
-        .article-card .meta {
-            display: flex;
-            gap: 16px;
-            margin-bottom: 12px;
+
+        .article-meta {
+            font-size: 13px;
             color: var(--text-muted);
-            font-size: 14px;
+            margin-bottom: 12px;
         }
-        .article-card .excerpt {
+
+        article h2 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+
+        article h2 a {
+            color: var(--text-primary);
+            text-decoration: none;
+            cursor: pointer;
+            display: block;
+        }
+
+        article h2 a:hover {
+            color: var(--accent);
+        }
+
+        article p {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .article-tags {
+            display: flex;
+            gap: 8px;
+            margin-top: 16px;
+        }
+
+        .tag {
+            font-size: 12px;
+            padding: 4px 10px;
+            background: #f0f4ff;
+            color: var(--accent);
+            border-radius: 4px;
+            text-decoration: none;
+        }
+
+        footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            padding: 48px 24px;
+            margin-top: auto;
+        }
+
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-title {
+            font-size: 14px;
+            font-weight: 600;
             color: var(--text-secondary);
             margin-bottom: 16px;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
         }
-        .article-card .tags { display: flex; flex-wrap: wrap; gap: 8px; }
-        .tag {
-            padding: 4px 12px;
-            background: #f1f5f9;
-            color: #475569;
-            border-radius: 4px;
-            font-size: 12px;
+
+        .friend-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
         }
-        .tag:hover { background: #e2e8f0; }
-        .loading { text-align: center; padding: 48px; color: var(--text-muted); }
-        footer {
-            text-align: center;
-            padding: 48px 24px;
-            color: var(--text-muted);
+
+        .friend-links a {
             font-size: 14px;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .friend-links a:hover {
+            color: var(--accent);
+        }
+
+        .copyright {
+            margin-top: 32px;
+            padding-top: 24px;
             border-top: 1px solid var(--border);
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 640px) {
+            .nav-inner {
+                flex-direction: column;
+                height: auto;
+                padding: 12px 24px;
+                gap: 12px;
+            }
+
+            .nav-left {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .nav-links {
+                gap: 20px;
+            }
+
+            .page-header h1 {
+                font-size: 28px;
+            }
+
+            article {
+                padding: 24px;
+            }
         }
     </style>
+    <script src="js/i18n.js"></script>
+    <script src="js/storage.js"></script>
 </head>
 <body>
     <nav>
         <div class="nav-inner">
-            <div>
-                <a href="index.html" class="logo" id="logoText">Image<span>Compressor</span></a>
+            <div class="nav-left">
+                <a href="index.html" class="logo">Image<span>Compressor</span></a>
                 <ul class="nav-links">
-                    <li><a href="index.html" id="navHome">Home</a></li>
-                    <li><a href="blog.html" id="navBlog">Blog</a></li>
-                    <li><a href="help.html" id="navHelp">Help</a></li>
+                    <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+                    <li><a href="blog.html" class="active" data-i18n="nav.blog">Blog</a></li>
+                    <li><a href="help.html" data-i18n="nav.help">Help</a></li>
                 </ul>
             </div>
-            <div class="language-switch">
-                <button class="lang-btn" id="langEn" onclick="setLanguage('en')">EN</button>
-                <button class="lang-btn" id="langZh" onclick="setLanguage('zh')">中文</button>
+            <div class="lang-switcher">
+                <button class="lang-btn active" data-lang="en">EN</button>
+                <button class="lang-btn" data-lang="zh">中文</button>
             </div>
         </div>
     </nav>
 
     <main>
         <div class="page-header">
-            <h1 id="pageTitle">Blog</h1>
-            <p id="pageDesc">Share knowledge about image compression, website optimization, and frontend development</p>
+            <h1 data-i18n="blog.title">Blog</h1>
+            <p data-i18n="blog.subtitle">Share knowledge about image compression, website optimization, and frontend development</p>
         </div>
 
-        <div class="article-list" id="articleList">
-            <div class="loading" id="loading">Loading articles...</div>
+        <div class="articles" id="articlesContainer">
         </div>
     </main>
 
     <footer>
-        <p id="copyright">© 2024 Image Compressor. Free online image compressor.</p>
+        <div class="footer-inner">
+            <div class="footer-title" data-i18n="footer.friendLinks">Friend Links</div>
+            <div class="friend-links" id="friendLinksContainer">
+            </div>
+            <div class="copyright" data-i18n="footer.copyright">© 2024 Image Compressor. Free online image compressor.</div>
+        </div>
     </footer>
 
     <script>
-        const translations = {
-            en: {
-                logo: 'Image<span>Compressor</span>',
-                navHome: 'Home',
-                navBlog: 'Blog',
-                navHelp: 'Help',
-                pageTitle: 'Blog',
-                pageDesc: 'Share knowledge about image compression, website optimization, and frontend development',
-                loading: 'Loading articles...',
-                readMore: 'Read More',
-                copyright: '© 2024 Image Compressor. Free online image compressor.',
-                category: 'Category:',
-                date: 'Date:'
-            },
-            zh: {
-                logo: '图<span>压缩</span>',
-                navHome: '首页',
-                navBlog: '博客',
-                navHelp: '帮助',
-                pageTitle: '博客',
-                pageDesc: '分享图片压缩、网站优化和前端开发的知识',
-                loading: '加载文章中...',
-                readMore: '阅读更多',
-                copyright: '© 2024 图片压缩工具. 免费在线图片压缩工具.',
-                category: '分类:',
-                date: '日期:'
-            }
-        };
+        const langBtns = document.querySelectorAll('.lang-btn');
 
-        function getBrowserLanguage() {
-            const lang = navigator.language || navigator.userLanguage;
-            return lang.startsWith('zh') ? 'zh' : 'en';
+        function initLanguage() {
+            const savedLang = localStorage.getItem('language') || 'en';
+            setLanguage(savedLang);
+            updateLangButtons(savedLang);
+            translatePage();
         }
-
-        function getStoredLanguage() {
-            const stored = localStorage.getItem('language');
-            if (stored) return stored;
-            const detected = getBrowserLanguage();
-            localStorage.setItem('language', detected);
-            return detected;
-        }
-
-        let currentLang = getStoredLanguage();
 
         function setLanguage(lang) {
-            currentLang = lang;
             localStorage.setItem('language', lang);
-            updateUI();
-        }
-
-        function updateUI() {
-            const t = translations[currentLang];
-            document.getElementById('logoText').innerHTML = t.logo;
-            document.getElementById('navHome').textContent = t.navHome;
-            document.getElementById('navBlog').textContent = t.navBlog;
-            document.getElementById('navHelp').textContent = t.navHelp;
-            document.getElementById('pageTitle').textContent = t.pageTitle;
-            document.getElementById('pageDesc').textContent = t.pageDesc;
-            document.getElementById('loading').textContent = t.loading;
-            document.getElementById('copyright').textContent = t.copyright;
-            document.getElementById('langEn').classList.toggle('active', currentLang === 'en');
-            document.getElementById('langZh').classList.toggle('active', currentLang === 'zh');
-            document.documentElement.lang = currentLang;
-        }
-
-        function loadArticles() {
-            const articles = getPosts(true);
-            const container = document.getElementById('articleList');
-            const t = translations[currentLang];
+            document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
             
-            if (!articles || articles.length === 0) {
-                container.innerHTML = `<p style="text-align:center; color: var(--text-muted); padding: 48px;">${currentLang === 'zh' ? '暂无文章' : 'No articles yet'}</p>`;
+            const logo = document.querySelector('.logo');
+            if (lang === 'zh') {
+                logo.innerHTML = '图<span>压缩</span>';
+                document.title = '博客 - 图压缩';
+            } else {
+                logo.innerHTML = 'Image<span>Compressor</span>';
+                document.title = 'Blog - Image Compressor';
+            }
+            
+            updateLangButtons(lang);
+            translatePage();
+        }
+
+        function updateLangButtons(lang) {
+            langBtns.forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+        }
+
+        langBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                setLanguage(btn.dataset.lang);
+            });
+        });
+
+        function showArticleDetail(post) {
+            const lang = getLanguage();
+            const message = lang === 'zh' 
+                ? `📄 ${post.title}\n\n${post.excerpt}\n\n📅 ${Utils.formatDate(post.createdAt)}\n\n🏷️ ${post.tags.join(', ')}\n\n\n文章详情功能开发中...`
+                : `📄 ${post.title}\n\n${post.excerpt}\n\n📅 ${Utils.formatDate(post.createdAt)}\n\n🏷️ ${post.tags.join(', ')}\n\n\nArticle details coming soon...`;
+            alert(message);
+        }
+
+        async function loadArticles() {
+            const container = document.getElementById('articlesContainer');
+            const allPosts = await Storage.getPosts();
+            const posts = allPosts.filter(p => p.status === 'published').sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+            
+            if (posts.length === 0) {
+                container.innerHTML = `
+                    <article>
+                        <p style="color: var(--text-muted); text-align: center; padding: 48px;">${getLanguage() === 'zh' ? '暂无文章' : 'No articles yet'}</p>
+                    </article>
+                `;
                 return;
             }
 
-            articles.sort((a, b) => (b.updatedAt || b.createdAt || 0) - (a.updatedAt || a.createdAt || 0));
+            container.innerHTML = posts.map(post => `
+                <article style="cursor: pointer;" onclick="window.location.href='blog-detail.html?id=${post.id}'">
+                    <div class="article-meta">${Utils.formatDate(post.createdAt)}</div>
+                    <h2><a href="blog-detail.html?id=${post.id}" style="text-decoration: none;">${post.title}</a></h2>
+                    <p>${post.excerpt}</p>
+                    <div class="article-tags">
+                        ${post.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                    </div>
+                </article>
+            `).join('');
+        }
+
+        function loadFriendLinks() {
+            const container = document.getElementById('friendLinksContainer');
+            const settings = Storage.getSettings();
             
-            container.innerHTML = articles.map(post => {
-                const title = currentLang === 'zh' ? post.titleZh : post.title;
-                const excerpt = currentLang === 'zh' ? post.excerptZh : post.excerpt;
-                const tags = currentLang === 'zh' ? (post.tagsZh || post.tags || []) : (post.tags || []);
-                const date = post.createdAt ? new Date(post.createdAt).toLocaleDateString(currentLang === 'zh' ? 'zh-CN' : 'en-US') : '';
-                
-                return `
-                    <article class="article-card">
-                        <a href="blog-detail.html?id=${post.id}">
-                            <h2>${title}</h2>
-                            <div class="meta">
-                                <span>${t.category} ${post.category || 'uncategorized'}</span>
-                                <span>${t.date} ${date}</span>
-                            </div>
-                            <p class="excerpt">${excerpt || ''}</p>
-                            <div class="tags">
-                                ${tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
-                            </div>
-                        </a>
-                    </article>
-                `;
-            }).join('');
-        }
-
-        function getPosts(publishedOnly = false) {
-            try {
-                const data = localStorage.getItem('imageCompressorData');
-                if (!data) return [];
-                const parsed = JSON.parse(data);
-                let posts = parsed.posts || [];
-                if (publishedOnly) {
-                    posts = posts.filter(p => p.status === 'published');
-                }
-                return posts;
-            } catch {
-                return [];
+            if (!settings.friendLinks || settings.friendLinks.length === 0) {
+                container.innerHTML = '';
+                return;
             }
+
+            container.innerHTML = settings.friendLinks.map(link => 
+                `<a href="${link.url}" target="_blank">${link.name}</a>`
+            ).join('');
         }
 
-        updateUI();
-        loadArticles();
+        document.addEventListener('DOMContentLoaded', () => {
+            // 记录页面访问
+            Storage.recordPageView();
+            
+            initLanguage();
+            loadArticles();
+            loadFriendLinks();
+        });
     </script>
 </body>
 </html>

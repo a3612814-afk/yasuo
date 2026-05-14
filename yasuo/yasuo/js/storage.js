@@ -168,6 +168,18 @@ const Storage = {
         const visitorId = this.getVisitorId();
         const now = Date.now();
         
+        // 初始化 analytics 对象
+        if (!data.analytics) data.analytics = {};
+        if (!data.analytics.pageStats) data.analytics.pageStats = {};
+        if (!data.analytics.todayVisitorsList) data.analytics.todayVisitorsList = [];
+        if (!data.analytics.onlineVisitorsList) data.analytics.onlineVisitorsList = [];
+        
+        // 初始化数值字段
+        if (data.analytics.totalViews === undefined) data.analytics.totalViews = 0;
+        if (data.analytics.todayViews === undefined) data.analytics.todayViews = 0;
+        if (data.analytics.todayVisitors === undefined) data.analytics.todayVisitors = 0;
+        if (data.analytics.totalVisitors === undefined) data.analytics.totalVisitors = 0;
+        
         // 增加总访问和今日访问
         data.analytics.totalViews++;
         data.analytics.todayViews++;
@@ -203,6 +215,9 @@ const Storage = {
         const data = this.getData();
         const visitorId = this.getVisitorId();
         const now = Date.now();
+        
+        // 初始化
+        if (!data.analytics.onlineVisitorsList) data.analytics.onlineVisitorsList = [];
         
         // 清理超时的访客（超过5分钟）
         data.analytics.onlineVisitorsList = data.analytics.onlineVisitorsList.filter(v => 
@@ -462,6 +477,33 @@ const Storage = {
         return data.user.isLoggedIn;
     },
     
+    // Convert blog post from bilingual JSON format to UI format
+    _convertPost(post, lang) {
+        const isZh = lang === 'zh';
+        const title = typeof post.title === 'object' ? (isZh ? post.title.zh : post.title.en) : post.title;
+        const excerpt = typeof post.excerpt === 'object' ? (isZh ? post.excerpt.zh : post.excerpt.en) : post.excerpt;
+        const content = typeof post.content === 'object' ? (isZh ? post.content.zh : post.content.en) : post.content;
+        const tags = Array.isArray(post.tags) ? post.tags : 
+                     (typeof post.tags === 'object' ? (isZh ? post.tags.zh : post.tags.en) : []);
+        
+        // Normalize createdAt - might be ISO string or timestamp
+        let createdAt = post.createdAt;
+        if (typeof createdAt === 'string' && !isNaN(Date.parse(createdAt))) {
+            createdAt = new Date(createdAt).getTime();
+        }
+        
+        return {
+            id: post.id,
+            title: title || '',
+            excerpt: excerpt || '',
+            content: content || '',
+            tags: tags || [],
+            category: post.category || 'seo',
+            status: post.status || 'published',
+            createdAt: createdAt || Date.now()
+        };
+    },
+    
     // Load blog posts from blogs.json (bilingual SEO articles)
     async loadBlogPosts() {
         try {
@@ -470,45 +512,49 @@ const Storage = {
             const data = await response.json();
             const posts = data.posts || [];
             const lang = localStorage.getItem('language') || 'en';
-            return posts.map(p => ({
-                ...p,
-                title: typeof p.title === 'object' ? (p.title[lang] || p.title.en || '') : p.title,
-                excerpt: typeof p.excerpt === 'object' ? (p.excerpt[lang] || p.excerpt.en || '') : p.excerpt,
-                content: typeof p.content === 'object' ? (p.content[lang] || p.content.en || '') : p.content,
-                tags: typeof p.tags === 'object' ? (p.tags[lang] || p.tags.en || []) : p.tags
-            }));
+            return posts.map(p => this._convertPost(p, lang));
         } catch (e) {
             return [];
         }
     },
-
+    
     // 博客文章
     async getPosts(onlyPublished = false) {
+        // First try to load from blogs.json (bilingual SEO articles)
         const blogPosts = await this.loadBlogPosts();
+        if (blogPosts.length > 0) {
+            const published = blogPosts.filter(p => p.status === 'published');
+            return onlyPublished ? published : blogPosts;
+        }
+        
+        // Fallback to localStorage
         const data = this.getData();
-        const localPosts = data.posts || [];
-        // Merge: deduplicate by id, blogs.json first
-        const seen = new Set();
-        const merged = [];
-        for (const p of [...blogPosts, ...localPosts]) {
-            if (!seen.has(String(p.id))) {
-                seen.add(String(p.id));
-                merged.push(p);
-            }
-        }
+        const posts = data.posts || [];
         if (onlyPublished) {
-            return merged.filter(p => p.status === 'published');
+            return posts.filter(p => p.status === 'published');
         }
-        return merged;
+        return posts;
     },
     
     getPost(id) {
         const data = this.getData();
-        return data.posts.find(p => p.id === id);
+        const found = data.posts.find(p => p.id === id);
+        if (found) return found;
+        // Also search in blogs.json (sync - check cache if available)
+        try {
+            const cached = localStorage.getItem('blogPostsCache');
+            if (cached) {
+                const posts = JSON.parse(cached);
+                return posts.find(p => p.id === id);
+            }
+        } catch(e) {}
+        return null;
     },
     
     savePost(post) {
         const data = this.getData();
+        if (!data.posts) data.posts = [];
+        
         const existingIndex = data.posts.findIndex(p => p.id === post.id);
         if (existingIndex >= 0) {
             post.updatedAt = Date.now();
@@ -517,6 +563,7 @@ const Storage = {
             post.id = Date.now().toString();
             post.createdAt = Date.now();
             post.updatedAt = Date.now();
+            if (!post.status) post.status = 'draft';
             data.posts.unshift(post);
         }
         this.setData(data);

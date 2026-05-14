@@ -3,17 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Compressor - Free Online Image Compressor Tool</title>
-    <meta name="description" content="Free online image compressor - compress JPG, PNG, WebP images without losing quality. Fast, secure, and privacy-friendly local processing.">
-    <meta name="keywords" content="image compressor, online image compressor, image compressor online, online image compressor tool, jpg image compressor, tinypng image compressor, free image compressor">
+    <title>Article - Image Compressor</title>
+    <meta name="description" content="Read articles about image compression, website optimization, and web development.">
+    <meta name="keywords" content="blog, article, image compression, web development">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="blog-detail.html">
-    <meta property="og:title" content="Image Compressor - Free Online Image Compressor Tool">
-    <meta property="og:description" content="Free online image compressor - compress JPG, PNG, WebP images without losing quality. Fast, secure, and privacy-friendly local processing.">
-    <meta property="og:type" content="website">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Image Compressor - Free Online Image Compressor Tool">
-    <meta name="twitter:description" content="Free online image compressor - compress JPG, PNG, WebP images without losing quality.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
@@ -30,9 +23,15 @@
             --radius: 12px;
             --shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03);
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: 'Space Grotesk', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
             background: var(--bg-primary);
             color: var(--text-primary);
             line-height: 1.8;
@@ -40,6 +39,7 @@
             display: flex;
             flex-direction: column;
         }
+
         nav {
             position: sticky;
             top: 0;
@@ -48,318 +48,511 @@
             border-bottom: 1px solid var(--border);
             z-index: 100;
         }
+
         .nav-inner {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 16px 24px;
+            padding: 0 24px;
+            height: 64px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
         }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
         .logo {
             font-family: 'Space Grotesk', sans-serif;
             font-size: 20px;
             font-weight: 700;
-            text-decoration: none;
             color: var(--text-primary);
+            text-decoration: none;
+            letter-spacing: -0.5px;
         }
-        .logo span { color: var(--accent); }
-        .nav-links { display: flex; gap: 24px; list-style: none; }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
         .nav-links a {
+            font-size: 15px;
+            font-weight: 500;
             color: var(--text-secondary);
             text-decoration: none;
-            font-weight: 500;
-            transition: color 0.2s;
+            transition: color 0.2s ease;
         }
-        .nav-links a:hover { color: var(--accent); }
-        .language-switch { display: flex; gap: 8px; }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--accent);
+        }
+
+        .lang-switcher {
+            display: flex;
+            gap: 4px;
+            background: var(--bg-primary);
+            padding: 4px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
         .lang-btn {
             padding: 6px 12px;
-            border: 1px solid var(--border);
-            border-radius: 6px;
+            border: none;
             background: transparent;
-            cursor: pointer;
             font-size: 14px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            cursor: pointer;
+            border-radius: 6px;
             transition: all 0.2s;
         }
-        .lang-btn:hover { border-color: var(--accent); }
+
+        .lang-btn:hover {
+            color: var(--text-primary);
+        }
+
         .lang-btn.active {
             background: var(--accent);
             color: white;
-            border-color: var(--accent);
         }
+
         main {
             flex: 1;
             max-width: 800px;
             margin: 0 auto;
-            padding: 48px 24px;
+            padding: 64px 24px;
+            width: 100%;
         }
-        .article {
+
+        .article-header {
+            margin-bottom: 48px;
+            padding-bottom: 32px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin-bottom: 24px;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: var(--accent);
+        }
+
+        .article-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: -1px;
+            line-height: 1.3;
+            margin-bottom: 16px;
+        }
+
+        .article-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            align-items: center;
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+
+        .article-category {
+            display: inline-block;
+            padding: 4px 12px;
+            background: #f0f4ff;
+            color: var(--accent);
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .article-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 16px;
+        }
+
+        .tag {
+            font-size: 12px;
+            padding: 4px 10px;
+            background: #f5f5f5;
+            color: var(--text-secondary);
+            border-radius: 4px;
+        }
+
+        .article-content {
             background: var(--bg-secondary);
             border-radius: var(--radius);
             padding: 40px;
             box-shadow: var(--shadow);
         }
-        .article-header { margin-bottom: 32px; }
-        .article-title {
-            font-size: 32px;
-            margin-bottom: 16px;
-            font-family: 'Space Grotesk', sans-serif;
-            line-height: 1.3;
-        }
-        .article-meta {
-            display: flex;
-            gap: 20px;
-            color: var(--text-muted);
-            font-size: 14px;
-            margin-bottom: 24px;
-        }
-        .article-content {
+
+        .article-content p {
+            margin-bottom: 20px;
+            font-size: 16px;
+            line-height: 1.8;
             color: var(--text-secondary);
         }
-        .article-content h2 {
-            font-size: 24px;
-            margin: 24px 0 12px;
-            color: var(--text-primary);
-            font-family: 'Space Grotesk', sans-serif;
-        }
+
         .article-content h3 {
-            font-size: 20px;
-            margin: 20px 0 10px;
+            font-size: 22px;
+            font-weight: 600;
+            margin: 36px 0 16px 0;
+            color: var(--text-primary);
+            line-height: 1.4;
+        }
+
+        .article-content h4 {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 28px 0 12px 0;
             color: var(--text-primary);
         }
-        .article-content p { margin-bottom: 16px; }
-        .article-content ul, .article-content ol {
+
+        .article-content ul,
+        .article-content ol {
             margin: 16px 0;
-            padding-left: 24px;
+            padding-left: 28px;
         }
-        .article-content li { margin-bottom: 8px; }
+
+        .article-content li {
+            margin: 8px 0;
+            line-height: 1.7;
+            color: var(--text-secondary);
+        }
+
+        .article-content strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
         .article-content code {
-            background: #f1f5f9;
-            padding: 2px 6px;
+            background: #f5f7fa;
+            padding: 3px 8px;
             border-radius: 4px;
-            font-family: monospace;
-            font-size: 0.9em;
+            font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+            font-size: 14px;
+            color: #e11d48;
         }
+
+        .article-content pre {
+            background: #1a1a2e;
+            color: #eaeaea;
+            padding: 20px 24px;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin: 24px 0;
+        }
+
+        .article-content pre code {
+            background: transparent;
+            padding: 0;
+            color: inherit;
+            font-size: 14px;
+        }
+
         .article-content blockquote {
             border-left: 4px solid var(--accent);
-            padding-left: 16px;
-            margin: 16px 0;
-            color: var(--text-muted);
+            padding-left: 20px;
+            margin: 24px 0;
+            color: var(--text-secondary);
             font-style: italic;
         }
-        .article-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 32px;
-            padding-top: 24px;
+
+        .article-content hr {
+            border: none;
             border-top: 1px solid var(--border);
+            margin: 32px 0;
         }
-        .tag {
-            padding: 6px 14px;
-            background: #f1f5f9;
-            color: #475569;
-            border-radius: 4px;
-            font-size: 13px;
-        }
-        .back-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
+
+        .article-content a {
             color: var(--accent);
-            text-decoration: none;
-            font-weight: 500;
-            margin-bottom: 24px;
-            transition: color 0.2s;
+            text-decoration: underline;
         }
-        .back-link:hover { color: var(--accent-hover); }
+
+        .article-content a:hover {
+            text-decoration: none;
+        }
+
         .not-found {
             text-align: center;
-            padding: 64px 24px;
+            padding: 80px 24px;
+            background: var(--bg-secondary);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
         }
+
         .not-found h2 {
+            font-family: 'Space Grotesk', sans-serif;
             font-size: 28px;
-            margin-bottom: 12px;
+            margin-bottom: 16px;
         }
+
         .not-found p {
             color: var(--text-secondary);
             margin-bottom: 24px;
         }
+
         footer {
-            text-align: center;
-            padding: 48px 24px;
-            color: var(--text-muted);
-            font-size: 14px;
+            background: var(--bg-secondary);
             border-top: 1px solid var(--border);
+            padding: 48px 24px;
+            margin-top: auto;
+        }
+
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+
+        .friend-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+
+        .friend-links a {
+            font-size: 14px;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .friend-links a:hover {
+            color: var(--accent);
+        }
+
+        .copyright {
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 640px) {
+            .nav-inner {
+                flex-direction: column;
+                height: auto;
+                padding: 12px 24px;
+                gap: 12px;
+            }
+
+            .nav-left {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .nav-links {
+                gap: 20px;
+            }
+
+            .article-title {
+                font-size: 28px;
+            }
+
+            .article-content {
+                padding: 24px;
+            }
         }
     </style>
+    <script src="js/i18n.js"></script>
+    <script src="js/storage.js"></script>
 </head>
 <body>
     <nav>
         <div class="nav-inner">
-            <div>
-                <a href="index.html" class="logo" id="logoText">Image<span>Compressor</span></a>
+            <div class="nav-left">
+                <a href="index.html" class="logo">Image<span>Compressor</span></a>
                 <ul class="nav-links">
-                    <li><a href="index.html" id="navHome">Home</a></li>
-                    <li><a href="blog.html" id="navBlog">Blog</a></li>
-                    <li><a href="help.html" id="navHelp">Help</a></li>
+                    <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+                    <li><a href="blog.html" class="active" data-i18n="nav.blog">Blog</a></li>
+                    <li><a href="help.html" data-i18n="nav.help">Help</a></li>
                 </ul>
             </div>
-            <div class="language-switch">
-                <button class="lang-btn" id="langEn" onclick="setLanguage('en')">EN</button>
-                <button class="lang-btn" id="langZh" onclick="setLanguage('zh')">中文</button>
+            <div class="lang-switcher">
+                <button class="lang-btn active" data-lang="en">EN</button>
+                <button class="lang-btn" data-lang="zh">中文</button>
             </div>
         </div>
     </nav>
 
-    <main>
-        <a href="blog.html" class="back-link" id="backLink">← Back to Blog</a>
-        
-        <article class="article" id="article">
-            <div class="article-header">
-                <h1 class="article-title" id="articleTitle">Loading...</h1>
-                <div class="article-meta">
-                    <span id="articleCategory">Category: Loading...</span>
-                    <span id="articleDate">Date: Loading...</span>
-                </div>
-            </div>
-            <div class="article-content" id="articleContent">Loading content...</div>
-            <div class="article-tags" id="articleTags"></div>
-        </article>
+    <main id="articlePage">
     </main>
 
     <footer>
-        <p id="copyright">© 2024 Image Compressor. Free online image compressor.</p>
+        <div class="footer-inner">
+            <div class="footer-title" data-i18n="footer.friendLinks">Friend Links</div>
+            <div class="friend-links" id="friendLinksContainer">
+            </div>
+            <div class="copyright" data-i18n="footer.copyright">© 2024 Image Compressor. Free online image compressor.</div>
+        </div>
     </footer>
 
     <script>
-        const translations = {
-            en: {
-                logo: 'Image<span>Compressor</span>',
-                navHome: 'Home',
-                navBlog: 'Blog',
-                navHelp: 'Help',
-                backLink: '← Back to Blog',
-                category: 'Category:',
-                date: 'Date:',
-                notFound: 'Article Not Found',
-                notFoundDesc: 'The article you are looking for does not exist.',
-                goBack: 'Go Back to Blog',
-                copyright: '© 2024 Image Compressor. Free online image compressor.'
-            },
-            zh: {
-                logo: '图<span>压缩</span>',
-                navHome: '首页',
-                navBlog: '博客',
-                navHelp: '帮助',
-                backLink: '← 返回博客',
-                category: '分类:',
-                date: '日期:',
-                notFound: '文章未找到',
-                notFoundDesc: '您查找的文章不存在。',
-                goBack: '返回博客',
-                copyright: '© 2024 图片压缩工具. 免费在线图片压缩工具.'
-            }
-        };
+        const langBtns = document.querySelectorAll('.lang-btn');
+        let currentPost = null;
 
-        function getBrowserLanguage() {
-            const lang = navigator.language || navigator.userLanguage;
-            return lang.startsWith('zh') ? 'zh' : 'en';
+        function initLanguage() {
+            const savedLang = localStorage.getItem('language') || 'en';
+            setLanguage(savedLang);
+            updateLangButtons(savedLang);
+            translatePage();
         }
-
-        function getStoredLanguage() {
-            const stored = localStorage.getItem('language');
-            if (stored) return stored;
-            const detected = getBrowserLanguage();
-            localStorage.setItem('language', detected);
-            return detected;
-        }
-
-        let currentLang = getStoredLanguage();
 
         function setLanguage(lang) {
-            currentLang = lang;
             localStorage.setItem('language', lang);
-            updateUI();
-            loadArticle();
-        }
-
-        function updateUI() {
-            const t = translations[currentLang];
-            document.getElementById('logoText').innerHTML = t.logo;
-            document.getElementById('navHome').textContent = t.navHome;
-            document.getElementById('navBlog').textContent = t.navBlog;
-            document.getElementById('navHelp').textContent = t.navHelp;
-            document.getElementById('backLink').textContent = t.backLink;
-            document.getElementById('copyright').textContent = t.copyright;
-            document.getElementById('langEn').classList.toggle('active', currentLang === 'en');
-            document.getElementById('langZh').classList.toggle('active', currentLang === 'zh');
-            document.documentElement.lang = currentLang;
-        }
-
-        function getPostById(id) {
-            try {
-                const data = localStorage.getItem('imageCompressorData');
-                if (!data) return null;
-                const parsed = JSON.parse(data);
-                const posts = parsed.posts || [];
-                return posts.find(p => p.id === id);
-            } catch {
-                return null;
+            document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+            
+            const logo = document.querySelector('.logo');
+            if (lang === 'zh') {
+                logo.innerHTML = '图<span>压缩</span>';
+                if (currentPost) {
+                    document.title = `${currentPost.title} - 图压缩`;
+                } else {
+                    document.title = '文章 - 图压缩';
+                }
+            } else {
+                logo.innerHTML = 'Image<span>Compressor</span>';
+                if (currentPost) {
+                    document.title = `${currentPost.title} - Image Compressor`;
+                } else {
+                    document.title = 'Article - Image Compressor';
+                }
             }
+            
+            updateLangButtons(lang);
+            translatePage();
         }
 
-        function loadArticle() {
+        function updateLangButtons(lang) {
+            langBtns.forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+        }
+
+        langBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                setLanguage(btn.dataset.lang);
+            });
+        });
+
+        function getUrlParameter(name) {
             const urlParams = new URLSearchParams(window.location.search);
-            const postId = urlParams.get('id');
+            return urlParams.get(name);
+        }
+
+        async function loadArticle() {
+            const container = document.getElementById('articlePage');
+            const postId = getUrlParameter('id');
+            const lang = getLanguage();
             
             if (!postId) {
-                showNotFound();
+                showNotFound(container, lang);
                 return;
             }
 
-            const post = getPostById(postId);
+            const posts = await Storage.getPosts();
+            const post = posts.find(p => p.id === postId);
             
             if (!post || post.status !== 'published') {
-                showNotFound();
+                showNotFound(container, lang);
                 return;
             }
 
-            const t = translations[currentLang];
-            const title = currentLang === 'zh' ? post.titleZh : post.title;
-            const content = currentLang === 'zh' ? post.contentZh : post.content;
-            const tags = currentLang === 'zh' ? (post.tagsZh || post.tags || []) : (post.tags || []);
-            const date = post.createdAt ? new Date(post.createdAt).toLocaleDateString(currentLang === 'zh' ? 'zh-CN' : 'en-US') : '';
+            currentPost = post;
             
-            document.getElementById('articleTitle').textContent = title || 'Untitled';
-            document.getElementById('articleCategory').textContent = `${t.category} ${post.category || 'Uncategorized'}`;
-            document.getElementById('articleDate').textContent = `${t.date} ${date}`;
-            document.getElementById('articleContent').innerHTML = formatContent(content || '');
-            document.getElementById('articleTags').innerHTML = tags.map(tag => `<span class="tag">${tag}</span>`).join('');
-        }
+            if (lang === 'zh') {
+                document.title = `${post.title} - 图压缩`;
+            } else {
+                document.title = `${post.title} - Image Compressor`;
+            }
 
-        function formatContent(content) {
-            return content
-                .replace(/\n\n/g, '</p><p>')
-                .replace(/\n/g, '<br>')
-                .replace(/^/, '<p>')
-                .replace(/$/, '</p>');
-        }
+            const backText = lang === 'zh' ? '← 返回博客' : '← Back to Blog';
+            const readTime = lang === 'zh' ? '约 5 分钟阅读' : '~5 min read';
 
-        function showNotFound() {
-            const t = translations[currentLang];
-            document.getElementById('article').innerHTML = `
-                <div class="not-found">
-                    <h2>${t.notFound}</h2>
-                    <p>${t.notFoundDesc}</p>
-                    <a href="blog.html" class="btn" style="display:inline-block; padding:12px 24px; background: var(--accent); color: white; border-radius: 8px; text-decoration: none;">${t.goBack}</a>
+            container.innerHTML = `
+                <div class="article-header">
+                    <a href="blog.html" class="back-link">${backText}</a>
+                    <h1 class="article-title">${post.title}</h1>
+                    <div class="article-meta">
+                        <span class="article-category">${Utils.getCategoryName(post.category)}</span>
+                        <span>${Utils.formatDate(post.createdAt)}</span>
+                        <span>${readTime}</span>
+                    </div>
+                    <div class="article-tags">
+                        ${post.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                    </div>
+                </div>
+                <div class="article-content">
+                    ${post.content}
                 </div>
             `;
         }
 
-        updateUI();
-        loadArticle();
+        function showNotFound(container, lang) {
+            const title = lang === 'zh' ? '文章不存在' : 'Article not found';
+            const desc = lang === 'zh' ? '抱歉，您查找的文章不存在或已被删除。' : 'Sorry, the article you are looking for does not exist or has been removed.';
+            const backBtn = lang === 'zh' ? '返回博客' : 'Back to Blog';
+
+            container.innerHTML = `
+                <div class="not-found">
+                    <h2>${title}</h2>
+                    <p>${desc}</p>
+                    <a href="blog.html" class="btn-primary" style="padding: 10px 24px; background: #2563eb; color: white; border-radius: 8px; text-decoration: none; display: inline-block;">${backBtn}</a>
+                </div>
+            `;
+        }
+
+        function loadFriendLinks() {
+            const container = document.getElementById('friendLinksContainer');
+            const settings = Storage.getSettings();
+            
+            if (!settings.friendLinks || settings.friendLinks.length === 0) {
+                container.innerHTML = '';
+                return;
+            }
+
+            container.innerHTML = settings.friendLinks.map(link => 
+                `<a href="${link.url}" target="_blank">${link.name}</a>`
+            ).join('');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // 记录页面访问
+            Storage.recordPageView();
+            
+            initLanguage();
+            loadArticle();
+            loadFriendLinks();
+        });
     </script>
 </body>
 </html>

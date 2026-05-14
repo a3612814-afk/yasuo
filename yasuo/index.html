@@ -31,7 +31,7 @@
         }
         .logo {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 24px;
+            font-size: 20px;
             font-weight: 700;
             color: #1a1a1a;
             text-decoration: none;
@@ -264,6 +264,19 @@
             font-size: 13px;
             color: #999;
         }
+        .savings-badge {
+            background: #dcfce7;
+            color: #16a34a;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            display: inline-flex;
+            margin-left: 8px;
+        }
+        .savings-badge.negative {
+            background: #fee2e2;
+            color: #dc2626;
+        }
     </style>
 </head>
 <body>
@@ -272,41 +285,44 @@
             <div style="display: flex; align-items: center; gap: 24px;">
                 <a href="index.html" class="logo">Image<span>Compressor</span></a>
                 <nav>
-                    <a href="index.html">Home</a>
-                    <a href="blog.html">Blog</a>
-                    <a href="help.html">Help</a>
+                    <a href="index.html" data-i18n="navHome">Home</a>
+                    <a href="blog.html" data-i18n="navBlog">Blog</a>
+                    <a href="help.html" data-i18n="navHelp">Help</a>
                 </nav>
             </div>
             <div class="language-switch">
-                <button class="lang-btn active" onclick="setLanguage('en')">EN</button>
-                <button class="lang-btn" onclick="setLanguage('zh')">中文</button>
+                <button class="lang-btn active" data-lang="en">EN</button>
+                <button class="lang-btn" data-lang="zh">中文</button>
             </div>
         </div>
     </header>
 
     <main>
         <div class="hero">
-            <h1 id="pageTitle">Free Online Image Compressor</h1>
-            <p id="pageDesc">No upload required, fast local processing. Privacy protected, high-quality compression.</p>
+            <h1 data-i18n="pageTitle">Free Online Image Compressor</h1>
+            <p data-i18n="pageDesc">No upload required, fast local processing. Privacy protected, high-quality compression.</p>
         </div>
 
         <div class="upload-area" id="uploadArea">
-            <h2 id="uploadTitle">Drag & Drop Images Here</h2>
-            <p id="uploadHint">or Click to Select Files · Supports JPG, PNG, WebP</p>
+            <h2 data-i18n="uploadTitle">Drag & Drop Images Here</h2>
+            <p data-i18n="uploadHint">or Click to Select Files · Supports JPG, PNG, WebP</p>
             <input type="file" id="fileInput" accept="image/*">
         </div>
 
-        <div class="compressor-section" id="compressorSection">
-            <h3 id="compressorTitle">Image Compression</h3>
+        <div class="compressor-section" id="compressorArea">
+            <h3 data-i18n="compressorTitle">Image Compression</h3>
             
             <div class="preview">
                 <div class="preview-box">
-                    <div class="label" id="originalLabel">Original</div>
+                    <div class="label" data-i18n="originalLabel">Original</div>
                     <img id="originalImg">
                     <div class="info" id="originalInfo">Original Size: --</div>
                 </div>
                 <div class="preview-box">
-                    <div class="label" id="compressedLabel">Compressed</div>
+                    <div class="label">
+                        <span data-i18n="compressedLabel">Compressed</span>
+                        <span class="savings-badge" id="savingsBadge" style="display:none;">-0%</span>
+                    </div>
                     <img id="compressedImg">
                     <div class="info" id="compressedInfo">Compressed Size: --</div>
                 </div>
@@ -314,17 +330,17 @@
 
             <div class="controls">
                 <div class="control-group">
-                    <label id="qualityLabel">Quality</label>
+                    <label data-i18n="qualityLabel">Quality</label>
                     <div class="value" id="qualityValue">80%</div>
                     <input type="range" id="qualitySlider" min="10" max="100" value="80">
                 </div>
                 <div class="control-group">
-                    <label id="scaleLabel">Scale</label>
+                    <label data-i18n="scaleLabel">Scale</label>
                     <div class="value" id="scaleValue">100%</div>
                     <input type="range" id="scaleSlider" min="10" max="100" value="100">
                 </div>
                 <div class="control-group">
-                    <label id="formatLabel">Format</label>
+                    <label data-i18n="formatLabel">Format</label>
                     <div class="value" id="formatValue">JPEG</div>
                     <select id="formatSelect">
                         <option value="jpeg">JPEG</option>
@@ -335,8 +351,8 @@
             </div>
 
             <div class="actions">
-                <button class="btn btn-primary" id="downloadBtn" disabled>Download Compressed Image</button>
-                <button class="btn btn-secondary" id="recompressBtn">Re-compress</button>
+                <button class="btn btn-primary" id="downloadBtn" disabled data-i18n="downloadBtn">Download Compressed Image</button>
+                <button class="btn btn-secondary" id="resetBtn" data-i18n="resetBtn">Reset</button>
             </div>
         </div>
 
@@ -348,8 +364,8 @@
                         <path d="M9 12l2 2 4-4"></path>
                     </svg>
                 </div>
-                <h4 id="feature1Title">Privacy Protected</h4>
-                <p id="feature1Desc">Local browser processing, no image upload</p>
+                <h4 data-i18n="feature1Title">Privacy Protected</h4>
+                <p data-i18n="feature1Desc">Local browser processing, no image upload</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">
@@ -357,8 +373,8 @@
                         <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
                     </svg>
                 </div>
-                <h4 id="feature2Title">Lightning Fast</h4>
-                <p id="feature2Desc">Local WASM engine, instant preview</p>
+                <h4 data-i18n="feature2Title">Lightning Fast</h4>
+                <p data-i18n="feature2Desc">Local WASM engine, instant preview</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">
@@ -367,216 +383,341 @@
                         <polyline points="16 10 10 16 8 14"></polyline>
                     </svg>
                 </div>
-                <h4 id="feature3Title">100% Free</h4>
-                <p id="feature3Desc">No watermark, no ads, no limits</p>
+                <h4 data-i18n="feature3Title">100% Free</h4>
+                <p data-i18n="feature3Desc">No watermark, no ads, no limits</p>
             </div>
         </div>
     </main>
 
     <footer>
-        <div class="friend-links">Friend Links</div>
+        <div class="friend-links" data-i18n="friendLinks">Friend Links</div>
         <p>© 2024 Image Compressor. Free online image compressor.</p>
     </footer>
 
+    <script src="js/storage.js"></script>
     <script>
-        const translations = {
-            en: {
-                pageTitle: 'Free Online Image Compressor',
-                pageDesc: 'No upload required, fast local processing. Privacy protected, high-quality compression.',
-                uploadTitle: 'Drag & Drop Images Here',
-                uploadHint: 'or Click to Select Files · Supports JPG, PNG, WebP',
-                compressorTitle: 'Image Compression',
-                originalLabel: 'Original',
-                compressedLabel: 'Compressed',
-                qualityLabel: 'Quality',
-                scaleLabel: 'Scale',
-                formatLabel: 'Format',
-                downloadBtn: 'Download Compressed Image',
-                recompressBtn: 'Re-compress',
-                feature1Title: 'Privacy Protected',
-                feature1Desc: 'Local browser processing, no image upload',
-                feature2Title: 'Lightning Fast',
-                feature2Desc: 'Local WASM engine, instant preview',
-                feature3Title: '100% Free',
-                feature3Desc: 'No watermark, no ads, no limits'
-            },
-            zh: {
-                pageTitle: '在线图片压缩工具',
-                pageDesc: '无需上传，本地快速处理。隐私保护，高质量压缩。',
-                uploadTitle: '点击或拖拽图片到这里',
-                uploadHint: '支持 JPG、PNG、WebP 格式',
-                compressorTitle: '图片压缩',
-                originalLabel: '原图',
-                compressedLabel: '压缩后',
-                qualityLabel: '压缩质量',
-                scaleLabel: '尺寸缩放',
-                formatLabel: '输出格式',
-                downloadBtn: '下载压缩图片',
-                recompressBtn: '重新压缩',
-                feature1Title: '隐私保护',
-                feature1Desc: '本地浏览器处理，无需上传图片',
-                feature2Title: '快速处理',
-                feature2Desc: '本地WASM引擎，即时预览',
-                feature3Title: '完全免费',
-                feature3Desc: '无水印，无广告，无限制'
-            }
-        };
+        (function() {
+            'use strict';
 
-        let currentLang = 'en';
-
-        function setLanguage(lang) {
-            currentLang = lang;
-            localStorage.setItem('language', lang);
-            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            updateUI();
-        }
-
-        function updateUI() {
-            const t = translations[currentLang];
-            document.getElementById('pageTitle').textContent = t.pageTitle;
-            document.getElementById('pageDesc').textContent = t.pageDesc;
-            document.getElementById('uploadTitle').textContent = t.uploadTitle;
-            document.getElementById('uploadHint').textContent = t.uploadHint;
-            document.getElementById('compressorTitle').textContent = t.compressorTitle;
-            document.getElementById('originalLabel').textContent = t.originalLabel;
-            document.getElementById('compressedLabel').textContent = t.compressedLabel;
-            document.getElementById('qualityLabel').textContent = t.qualityLabel;
-            document.getElementById('scaleLabel').textContent = t.scaleLabel;
-            document.getElementById('formatLabel').textContent = t.formatLabel;
-            document.getElementById('downloadBtn').textContent = t.downloadBtn;
-            document.getElementById('recompressBtn').textContent = t.recompressBtn;
-            document.getElementById('feature1Title').textContent = t.feature1Title;
-            document.getElementById('feature1Desc').textContent = t.feature1Desc;
-            document.getElementById('feature2Title').textContent = t.feature2Title;
-            document.getElementById('feature2Desc').textContent = t.feature2Desc;
-            document.getElementById('feature3Title').textContent = t.feature3Title;
-            document.getElementById('feature3Desc').textContent = t.feature3Desc;
-        }
-
-        const uploadArea = document.getElementById('uploadArea');
-        const fileInput = document.getElementById('fileInput');
-        const originalImg = document.getElementById('originalImg');
-        const compressedImg = document.getElementById('compressedImg');
-        const originalInfo = document.getElementById('originalInfo');
-        const compressedInfo = document.getElementById('compressedInfo');
-        const qualitySlider = document.getElementById('qualitySlider');
-        const qualityValue = document.getElementById('qualityValue');
-        const scaleSlider = document.getElementById('scaleSlider');
-        const scaleValue = document.getElementById('scaleValue');
-        const formatSelect = document.getElementById('formatSelect');
-        const formatValue = document.getElementById('formatValue');
-        const downloadBtn = document.getElementById('downloadBtn');
-        const recompressBtn = document.getElementById('recompressBtn');
-        
-        let currentFile = null;
-        let compressedBlob = null;
-
-        uploadArea.addEventListener('click', () => fileInput.click());
-        uploadArea.addEventListener('dragover', (e) => { e.preventDefault(); uploadArea.classList.add('dragover'); });
-        uploadArea.addEventListener('dragleave', () => uploadArea.classList.remove('dragover'));
-        uploadArea.addEventListener('drop', (e) => {
-            e.preventDefault();
-            uploadArea.classList.remove('dragover');
-            const files = e.dataTransfer.files;
-            if (files.length > 0 && files[0].type.startsWith('image/')) {
-                currentFile = files[0];
-                loadAndCompress(files[0]);
-            }
-        });
-        
-        fileInput.addEventListener('change', (e) => {
-            const file = e.target.files[0];
-            if (file && file.type.startsWith('image/')) {
-                currentFile = file;
-                loadAndCompress(file);
-            }
-        });
-        
-        qualitySlider.addEventListener('input', () => qualityValue.textContent = qualitySlider.value + '%');
-        scaleSlider.addEventListener('input', () => scaleValue.textContent = scaleSlider.value + '%');
-        formatSelect.addEventListener('change', () => formatValue.textContent = formatSelect.value.toUpperCase());
-        
-        recompressBtn.addEventListener('click', () => compressImage());
-
-        function loadAndCompress(file) {
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                document.getElementById('compressorSection').classList.add('active');
-                originalImg.src = e.target.result;
-                originalImg.style.display = 'block';
-                originalInfo.textContent = `${translations[currentLang].originalLabel}: ${formatSize(file.size)}`;
-                downloadBtn.disabled = true;
-                compressImage();
+            // 翻译数据
+            const i18n = {
+                en: {
+                    navHome: 'Home',
+                    navBlog: 'Blog',
+                    navHelp: 'Help',
+                    pageTitle: 'Free Online Image Compressor',
+                    pageDesc: 'No upload required, fast local processing. Privacy protected, high-quality compression.',
+                    uploadTitle: 'Drag & Drop Images Here',
+                    uploadHint: 'or Click to Select Files · Supports JPG, PNG, WebP',
+                    compressorTitle: 'Image Compression',
+                    originalLabel: 'Original',
+                    compressedLabel: 'Compressed',
+                    qualityLabel: 'Quality',
+                    scaleLabel: 'Scale',
+                    formatLabel: 'Format',
+                    downloadBtn: 'Download Compressed Image',
+                    resetBtn: 'Reset',
+                    feature1Title: 'Privacy Protected',
+                    feature1Desc: 'Local browser processing, no image upload',
+                    feature2Title: 'Lightning Fast',
+                    feature2Desc: 'Local WASM engine, instant preview',
+                    feature3Title: '100% Free',
+                    feature3Desc: 'No watermark, no ads, no limits',
+                    noCompression: '(no compression needed)',
+                    friendLinks: 'Friend Links',
+                    errorSelectImage: 'Please select an image file'
+                },
+                zh: {
+                    navHome: '首页',
+                    navBlog: '博客',
+                    navHelp: '帮助',
+                    pageTitle: '在线图片压缩工具',
+                    pageDesc: '无需上传，本地快速处理。隐私保护，高质量压缩。',
+                    uploadTitle: '点击或拖拽图片到这里',
+                    uploadHint: '支持 JPG、PNG、WebP 格式',
+                    compressorTitle: '图片压缩',
+                    originalLabel: '原图',
+                    compressedLabel: '压缩后',
+                    qualityLabel: '压缩质量',
+                    scaleLabel: '尺寸缩放',
+                    formatLabel: '输出格式',
+                    downloadBtn: '下载压缩图片',
+                    resetBtn: '重置',
+                    feature1Title: '隐私保护',
+                    feature1Desc: '本地浏览器处理，无需上传图片',
+                    feature2Title: '快速处理',
+                    feature2Desc: '本地WASM引擎，即时预览',
+                    feature3Title: '完全免费',
+                    feature3Desc: '无水印，无广告，无限制',
+                    noCompression: '(无需压缩)',
+                    friendLinks: '友情链接',
+                    errorSelectImage: '请选择图片文件'
+                }
             };
-            reader.readAsDataURL(file);
-        }
-        
-        function compressImage() {
-            if (!currentFile) return;
-            
-            const quality = qualitySlider.value / 100;
-            const scale = scaleSlider.value / 100;
-            const format = formatSelect.value;
-            const mimeType = format === 'jpeg' ? 'image/jpeg' : (format === 'webp' ? 'image/webp' : 'image/png');
-            
-            const img = new Image();
-            img.onload = () => {
-                const targetWidth = Math.round(img.width * scale);
-                const targetHeight = Math.round(img.height * scale);
+
+            // 状态管理
+            let state = {
+                lang: 'en',
+                file: null,
+                compressedBlob: null,
+                originalSize: 0,
+                compressedSize: 0
+            };
+
+            // DOM元素缓存
+            const el = {};
+
+            // 初始化DOM元素引用
+            function initElements() {
+                el.uploadArea = document.getElementById('uploadArea');
+                el.fileInput = document.getElementById('fileInput');
+                el.compressorArea = document.getElementById('compressorArea');
+                el.originalImg = document.getElementById('originalImg');
+                el.compressedImg = document.getElementById('compressedImg');
+                el.originalInfo = document.getElementById('originalInfo');
+                el.compressedInfo = document.getElementById('compressedInfo');
+                el.savingsBadge = document.getElementById('savingsBadge');
+                el.qualitySlider = document.getElementById('qualitySlider');
+                el.qualityValue = document.getElementById('qualityValue');
+                el.scaleSlider = document.getElementById('scaleSlider');
+                el.scaleValue = document.getElementById('scaleValue');
+                el.formatSelect = document.getElementById('formatSelect');
+                el.formatValue = document.getElementById('formatValue');
+                el.downloadBtn = document.getElementById('downloadBtn');
+                el.resetBtn = document.getElementById('resetBtn');
+                el.langBtns = document.querySelectorAll('.lang-btn');
+            }
+
+            // 检测系统语言
+            function detectLanguage() {
+                const saved = localStorage.getItem('language');
+                if (saved) return saved;
+                const browserLang = navigator.language || navigator.userLanguage;
+                return browserLang && browserLang.startsWith('zh') ? 'zh' : 'en';
+            }
+
+            // 设置语言
+            function setLanguage(lang) {
+                state.lang = lang;
+                localStorage.setItem('language', lang);
+                updateLangButtons();
+                updateUI();
+                if (state.file) updateInfoLabels();
+            }
+
+            // 更新语言按钮状态
+            function updateLangButtons() {
+                el.langBtns.forEach(btn => {
+                    btn.classList.toggle('active', btn.dataset.lang === state.lang);
+                });
+            }
+
+            // 获取翻译文本
+            function t(key) {
+                return i18n[state.lang][key] || key;
+            }
+
+            // 更新UI文本
+            function updateUI() {
+                document.querySelectorAll('[data-i18n]').forEach(el => {
+                    el.textContent = t(el.dataset.i18n);
+                });
+            }
+
+            // 更新信息标签
+            function updateInfoLabels() {
+                el.originalInfo.textContent = `${t('originalLabel')}: ${Utils.formatSize(state.originalSize)}`;
                 
-                if (format === 'png' && scale >= 1.0) {
-                    compressedBlob = currentFile;
-                    compressedImg.src = URL.createObjectURL(currentFile);
-                    compressedImg.style.display = 'block';
-                    compressedInfo.textContent = `${translations[currentLang].compressedLabel}: ${formatSize(currentFile.size)}`;
-                    downloadBtn.disabled = false;
+                if (state.compressedSize > 0) {
+                    const needsCompression = el.formatSelect.value !== 'png' || el.scaleSlider.value < 100;
+                    if (needsCompression && state.compressedSize >= state.originalSize && el.scaleSlider.value >= 100) {
+                        el.compressedInfo.textContent = `${t('compressedLabel')}: ${Utils.formatSize(state.compressedSize)} ${t('noCompression')}`;
+                    } else {
+                        el.compressedInfo.textContent = `${t('compressedLabel')}: ${Utils.formatSize(state.compressedSize)}`;
+                    }
+                }
+            }
+
+            // 处理文件选择
+            function handleFiles(files) {
+                if (!files.length) return;
+                const file = files[0];
+                if (!file.type.startsWith('image/')) {
+                    alert(t('errorSelectImage'));
                     return;
                 }
-                
-                const canvas = document.createElement('canvas');
-                const ctx = canvas.getContext('2d');
-                canvas.width = targetWidth;
-                canvas.height = targetHeight;
-                ctx.drawImage(img, 0, 0, targetWidth, targetHeight);
-                
-                canvas.toBlob((blob) => {
-                    compressedBlob = blob;
-                    compressedImg.src = URL.createObjectURL(blob);
-                    compressedImg.style.display = 'block';
-                    compressedInfo.textContent = `${translations[currentLang].compressedLabel}: ${formatSize(blob.size)}`;
-                    downloadBtn.disabled = false;
-                }, mimeType, quality);
-            };
-            img.src = originalImg.src;
-        }
-        
-        function downloadImage() {
-            if (!compressedBlob || !currentFile) return;
-            const originalName = currentFile.name.split('.')[0];
-            const format = formatSelect.value;
-            const filename = `${originalName}_compressed.${format}`;
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(compressedBlob);
-            link.download = filename;
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            URL.revokeObjectURL(link.href);
-        }
-        
-        downloadBtn.addEventListener('click', downloadImage);
-        
-        function formatSize(bytes) {
-            if (bytes < 1024) return bytes + ' B';
-            if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(2) + ' KB';
-            return (bytes / (1024 * 1024)).toFixed(2) + ' MB';
-        }
+                state.file = file;
+                loadImage(file);
+            }
 
-        const savedLang = localStorage.getItem('language');
-        if (savedLang && savedLang === 'zh') {
-            setLanguage('zh');
-        }
+            // 加载图片
+            function loadImage(file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    el.originalImg.src = e.target.result;
+                    el.originalImg.style.display = 'block';
+                    state.originalSize = file.size;
+                    updateInfoLabels();
+                    el.uploadArea.style.display = 'none';
+                    el.compressorArea.classList.add('active');
+                    compressImage();
+                };
+                reader.readAsDataURL(file);
+            }
+
+            // 压缩图片
+            function compressImage() {
+                if (!state.file) return;
+
+                const quality = el.qualitySlider.value / 100;
+                const scale = el.scaleSlider.value / 100;
+                const format = el.formatSelect.value;
+                const mimeType = format === 'jpeg' ? 'image/jpeg' : format === 'webp' ? 'image/webp' : 'image/png';
+
+                const img = new Image();
+                img.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+                    canvas.width = Math.round(img.width * scale);
+                    canvas.height = Math.round(img.height * scale);
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+                    canvas.toBlob(function(blob) {
+                        const needsCompression = format !== 'png' || scale < 1.0;
+                        
+                        if (needsCompression && blob.size >= state.originalSize && scale >= 1.0) {
+                            state.compressedBlob = state.file;
+                            state.compressedSize = state.file.size;
+                            el.compressedImg.src = URL.createObjectURL(state.file);
+                            el.savingsBadge.style.display = 'none';
+                        } else {
+                            state.compressedBlob = blob;
+                            state.compressedSize = blob.size;
+                            el.compressedImg.src = URL.createObjectURL(blob);
+                            updateSavings();
+                        }
+                        
+                        el.compressedImg.style.display = 'block';
+                        updateInfoLabels();
+                        el.downloadBtn.disabled = false;
+                    }, mimeType, quality);
+                };
+                img.src = el.originalImg.src;
+            }
+
+            // 更新节省比例
+            function updateSavings() {
+                if (state.originalSize <= 0 || state.compressedSize <= 0) return;
+                
+                const savings = Math.round((1 - state.compressedSize / state.originalSize) * 100);
+                el.savingsBadge.textContent = (savings > 0 ? '-' : '+') + Math.abs(savings) + '%';
+                el.savingsBadge.style.display = 'inline-flex';
+                el.savingsBadge.className = savings > 0 ? 'savings-badge' : 'savings-badge negative';
+            }
+
+            // 下载图片
+            function downloadImage() {
+                if (!state.compressedBlob || !state.file) return;
+                
+                const originalName = state.file.name.split('.')[0];
+                const format = el.formatSelect.value;
+                const filename = originalName + '_compressed.' + format;
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(state.compressedBlob);
+                link.download = filename;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(link.href);
+                
+                // 记录压缩统计
+                try {
+                    Storage.recordCompression(state.originalSize, state.compressedSize, format);
+                } catch (e) {}
+            }
+
+            // 重置压缩器
+            function resetCompressor() {
+                state = {
+                    lang: state.lang,
+                    file: null,
+                    compressedBlob: null,
+                    originalSize: 0,
+                    compressedSize: 0
+                };
+                
+                el.originalImg.src = '';
+                el.originalImg.style.display = 'none';
+                el.compressedImg.src = '';
+                el.compressedImg.style.display = 'none';
+                el.fileInput.value = '';
+                el.uploadArea.style.display = 'block';
+                el.compressorArea.classList.remove('active');
+                el.savingsBadge.style.display = 'none';
+                el.downloadBtn.disabled = true;
+            }
+
+            // 绑定事件
+            function bindEvents() {
+                // 上传区域事件
+                el.uploadArea.addEventListener('click', () => el.fileInput.click());
+                el.uploadArea.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    el.uploadArea.classList.add('dragover');
+                });
+                el.uploadArea.addEventListener('dragleave', () => {
+                    el.uploadArea.classList.remove('dragover');
+                });
+                el.uploadArea.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    el.uploadArea.classList.remove('dragover');
+                    if (e.dataTransfer.files.length > 0) {
+                        handleFiles(e.dataTransfer.files);
+                    }
+                });
+                
+                // 文件输入事件
+                el.fileInput.addEventListener('change', (e) => handleFiles(e.target.files));
+                
+                // 控制滑块事件
+                el.qualitySlider.addEventListener('input', () => {
+                    el.qualityValue.textContent = el.qualitySlider.value + '%';
+                    if (state.file) compressImage();
+                });
+                el.scaleSlider.addEventListener('input', () => {
+                    el.scaleValue.textContent = el.scaleSlider.value + '%';
+                    if (state.file) compressImage();
+                });
+                el.formatSelect.addEventListener('change', () => {
+                    el.formatValue.textContent = el.formatSelect.value.toUpperCase();
+                    if (state.file) compressImage();
+                });
+                
+                // 按钮事件
+                el.resetBtn.addEventListener('click', resetCompressor);
+                el.downloadBtn.addEventListener('click', downloadImage);
+                
+                // 语言切换事件
+                el.langBtns.forEach(btn => {
+                    btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+                });
+            }
+
+            // 初始化应用
+            function init() {
+                initElements();
+                bindEvents();
+                setLanguage(detectLanguage());
+                
+                // 记录页面访问
+                try {
+                    Storage.recordPageView('index.html');
+                } catch (e) {}
+            }
+
+            // DOM加载完成后初始化
+            document.addEventListener('DOMContentLoaded', init);
+        })();
     </script>
 </body>
 </html>
