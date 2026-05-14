@@ -373,9 +373,9 @@
             alert(message);
         }
 
-        function loadArticles() {
+        async function loadArticles() {
             const container = document.getElementById('articlesContainer');
-            const posts = Storage.getPosts().filter(p => p.status === 'published').sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+            const posts = await Storage.getPosts().filter(p => p.status === 'published').sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
             
             if (posts.length === 0) {
                 container.innerHTML = `

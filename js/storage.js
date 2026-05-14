@@ -462,8 +462,35 @@ const Storage = {
         return data.user.isLoggedIn;
     },
     
+    // Load blog posts from blogs.json (bilingual SEO articles)
+    async loadBlogPosts() {
+        try {
+            const response = await fetch('blogs.json');
+            if (!response.ok) return [];
+            const data = await response.json();
+            const posts = data.posts || [];
+            const lang = localStorage.getItem('language') || 'en';
+            return posts.map(p => ({
+                ...p,
+                title: typeof p.title === 'object' ? (p.title[lang] || p.title.en || '') : p.title,
+                excerpt: typeof p.excerpt === 'object' ? (p.excerpt[lang] || p.excerpt.en || '') : p.excerpt,
+                content: typeof p.content === 'object' ? (p.content[lang] || p.content.en || '') : p.content,
+                tags: typeof p.tags === 'object' ? (p.tags[lang] || p.tags.en || []) : p.tags
+            }));
+        } catch (e) {
+            return [];
+        }
+    },
+
     // 博客文章
-    getPosts(onlyPublished = false) {
+    async getPosts(onlyPublished = false) {
+        const blogPosts = await this.loadBlogPosts();
+        if (blogPosts.length > 0) {
+            if (onlyPublished) {
+                return blogPosts.filter(p => p.status === 'published');
+            }
+            return blogPosts;
+        }
         const data = this.getData();
         if (onlyPublished) {
             return data.posts.filter(p => p.status === 'published');
