@@ -189,7 +189,7 @@
                         added++;
                     }
                 }
-                Storage.saveData(data);
+                Storage.setData(data);
                 refreshList();
                 showMsg(`✅ 导入完成：新增 ${added} 篇，更新 ${updated} 篇`, 'success');
             } catch (e) {
@@ -200,7 +200,7 @@
         function deleteArticle(id) {
             const data = Storage.getData();
             data.posts = data.posts.filter(p => String(p.id) !== String(id));
-            Storage.saveData(data);
+            Storage.setData(data);
             refreshList();
         }
 
@@ -208,7 +208,7 @@
             if (!confirm('确定清空所有文章？')) return;
             const data = Storage.getData();
             data.posts = [];
-            Storage.saveData(data);
+            Storage.setData(data);
             refreshList();
             showMsg('已清空所有文章', 'success');
         }
