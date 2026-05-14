@@ -485,17 +485,21 @@ const Storage = {
     // 博客文章
     async getPosts(onlyPublished = false) {
         const blogPosts = await this.loadBlogPosts();
-        if (blogPosts.length > 0) {
-            if (onlyPublished) {
-                return blogPosts.filter(p => p.status === 'published');
-            }
-            return blogPosts;
-        }
         const data = this.getData();
-        if (onlyPublished) {
-            return data.posts.filter(p => p.status === 'published');
+        const localPosts = data.posts || [];
+        // Merge: deduplicate by id, blogs.json first
+        const seen = new Set();
+        const merged = [];
+        for (const p of [...blogPosts, ...localPosts]) {
+            if (!seen.has(String(p.id))) {
+                seen.add(String(p.id));
+                merged.push(p);
+            }
         }
-        return data.posts;
+        if (onlyPublished) {
+            return merged.filter(p => p.status === 'published');
+        }
+        return merged;
     },
     
     getPost(id) {
