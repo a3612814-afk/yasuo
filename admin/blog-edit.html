@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Edit and publish blog articles for image compression tool">
-    <meta name="keywords" content="admin, blog, article, edit, publish">
-    <title data-i18n="admin.blogEdit.title">Edit Article - Image Compressor</title>
+    <meta name="description" content="编辑文章">
+    <meta name="keywords" content="编辑文章, 博客, 图片压缩">
+    <title>编辑文章 - 图片压缩工具</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
@@ -64,7 +64,6 @@
             flex: 1;
             margin-left: 240px;
             padding: 24px;
-            max-width: 900px;
         }
         .header {
             display: flex;
@@ -76,104 +75,6 @@
             font-family: 'Space Grotesk', sans-serif;
             font-size: 24px;
             font-weight: 700;
-        }
-        .lang-switcher {
-            display: flex;
-            gap: 8px;
-        }
-        .lang-btn {
-            padding: 6px 12px;
-            border: 1px solid #e5e5e5;
-            background: #fff;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 13px;
-            transition: all 0.2s;
-        }
-        .lang-btn:hover {
-            border-color: #2563eb;
-            color: #2563eb;
-        }
-        .lang-btn.active {
-            background: #2563eb;
-            color: #fff;
-            border-color: #2563eb;
-        }
-        .card {
-            background: #fff;
-            border-radius: 12px;
-            padding: 24px;
-            margin-bottom: 20px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
-        }
-        .form-group { margin-bottom: 20px; }
-        .form-group label {
-            display: block;
-            font-size: 14px;
-            font-weight: 500;
-            margin-bottom: 8px;
-            color: #1a1a1a;
-        }
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px 16px;
-            border: 1px solid #e5e5e5;
-            border-radius: 8px;
-            font-size: 14px;
-            font-family: inherit;
-            transition: border-color 0.2s;
-        }
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #2563eb;
-        }
-        .form-group textarea {
-            min-height: 300px;
-            resize: vertical;
-            line-height: 1.8;
-        }
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-        .tag-input {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            padding: 8px;
-            border: 1px solid #e5e5e5;
-            border-radius: 8px;
-            min-height: 48px;
-        }
-        .tag-item {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 4px 10px;
-            background: #f0f4ff;
-            color: #2563eb;
-            border-radius: 4px;
-            font-size: 13px;
-        }
-        .tag-item span { cursor: pointer; opacity: 0.7; }
-        .tag-item span:hover { opacity: 1; }
-        .tag-input input {
-            flex: 1;
-            min-width: 100px;
-            border: none;
-            padding: 4px;
-        }
-        .tag-input input:focus { border: none; }
-        .actions {
-            display: flex;
-            gap: 12px;
-            justify-content: flex-end;
-            padding-top: 10px;
         }
         .btn {
             padding: 10px 20px;
@@ -192,10 +93,97 @@
         .btn-primary:hover { background: #1d4ed8; }
         .btn-secondary { background: #fff; color: #1a1a1a; border: 1px solid #e5e5e5; }
         .btn-secondary:hover { border-color: #2563eb; color: #2563eb; }
-        .tip {
+        .btn-ghost { background: transparent; color: #666; }
+        .btn-ghost:hover { color: #2563eb; }
+        .card {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+            margin-bottom: 24px;
+        }
+        .card-header {
+            padding: 16px 24px;
+            border-bottom: 1px solid #e5e5e5;
+            font-weight: 600;
+        }
+        .card-body { padding: 24px; }
+        .form-group { margin-bottom: 20px; }
+        .form-group:last-child { margin-bottom: 0; }
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid #e5e5e5;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: border-color 0.2s;
+        }
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+        textarea {
+            min-height: 300px;
+            resize: vertical;
+            line-height: 1.6;
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        .tag-input {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding: 8px;
+            border: 1px solid #e5e5e5;
+            border-radius: 8px;
+            min-height: 42px;
+        }
+        .tag-input:focus-within { border-color: #2563eb; }
+        .tag-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 10px;
+            background: #f0f4ff;
+            color: #2563eb;
+            border-radius: 4px;
             font-size: 13px;
-            color: #666;
-            margin-top: 8px;
+        }
+        .tag-item button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            color: #2563eb;
+            font-size: 14px;
+            line-height: 1;
+        }
+        .tag-item button:hover { color: #dc2626; }
+        .tag-input input {
+            flex: 1;
+            min-width: 100px;
+            border: none;
+            padding: 4px;
+        }
+        .tag-input input:focus { border: none; }
+        .tip {
+            font-size: 12px;
+            color: #999;
+            margin-top: 6px;
+        }
+        .actions {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
         }
         @media (max-width: 768px) {
             .sidebar { display: none; }
@@ -208,221 +196,227 @@
     <aside class="sidebar">
         <div class="logo">图<span>压缩</span> Admin</div>
         <div class="nav-section">
-            <div class="nav-title" data-i18n="admin.nav.dataCenter">Data Center</div>
+            <div class="nav-title">数据中心</div>
             <a href="dashboard.html" class="nav-item">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" />
                 </svg>
-                <span data-i18n="admin.nav.overview">Overview</span>
+                <span>概览</span>
             </a>
         </div>
         <div class="nav-section">
-            <div class="nav-title" data-i18n="admin.nav.blogCenter">Blog Center</div>
+            <div class="nav-title">博客中心</div>
             <a href="blog-list.html" class="nav-item">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
                 </svg>
-                <span data-i18n="admin.nav.articles">Articles</span>
+                <span>文章管理</span>
             </a>
             <a href="blog-edit.html" class="nav-item active">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" />
                 </svg>
-                <span data-i18n="admin.nav.newArticle">New Article</span>
+                <span>新建文章</span>
             </a>
         </div>
         <div class="nav-section">
-            <div class="nav-title" data-i18n="admin.nav.system">System</div>
+            <div class="nav-title">系统</div>
             <a href="settings.html" class="nav-item">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z" />
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
-                <span data-i18n="admin.nav.settings">Settings</span>
+                <span>设置</span>
             </a>
             <div class="nav-item" id="logoutBtn">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25V9" />
                     <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
                 </svg>
-                <span data-i18n="admin.nav.logout">Logout</span>
+                <span>退出登录</span>
             </div>
         </div>
     </aside>
 
     <main class="main">
         <div class="header">
-            <h1 id="pageTitle" data-i18n="admin.blogEdit.newArticle">New Article</h1>
-            <div class="lang-switcher">
-                <button class="lang-btn" id="lang-en" onclick="switchLanguage('en')">EN</button>
-                <button class="lang-btn" id="lang-zh" onclick="switchLanguage('zh')">中文</button>
-            </div>
+            <h1 id="pageTitle">新建文章</h1>
+            <a href="blog-list.html" class="btn btn-ghost">← 返回</a>
         </div>
-        <form id="postForm" class="card">
-            <div class="form-group">
-                <label data-i18n="admin.blogEdit.articleTitle">Article Title</label>
-                <input type="text" id="title" placeholder="" required>
-            </div>
-            <div class="form-row">
+
+        <div class="card">
+            <div class="card-header">文章信息</div>
+            <div class="card-body">
                 <div class="form-group">
-                    <label data-i18n="admin.blogEdit.category">Category</label>
-                    <select id="category" required>
-                        <option value="">-- Select --</option>
-                        <option value="image-optimize">Image Optimization</option>
-                        <option value="frontend">Frontend Optimization</option>
-                        <option value="seo">SEO</option>
-                        <option value="tech">Technical Comparison</option>
-                        <option value="ecommerce">E-commerce</option>
-                    </select>
+                    <label>文章标题</label>
+                    <input type="text" id="title" placeholder="输入文章标题">
                 </div>
                 <div class="form-group">
-                    <label data-i18n="admin.blogEdit.tags">Tags</label>
-                    <div class="tag-input" id="tagInput">
-                        <input type="text" id="newTag" placeholder="">
+                    <label>摘要</label>
+                    <textarea id="excerpt" rows="3" placeholder="简要描述文章内容，用于列表展示和SEO"></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>分类</label>
+                        <select id="category">
+                            <option value="">选择分类</option>
+                            <option value="image-optimize">图片优化</option>
+                            <option value="frontend">前端优化</option>
+                            <option value="seo">SEO</option>
+                            <option value="tech">技术对比</option>
+                            <option value="ecommerce">电商</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>状态</label>
+                        <select id="status">
+                            <option value="draft">草稿</option>
+                            <option value="published">发布</option>
+                        </select>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label>标签</label>
+                    <div class="tag-input" id="tagInput">
+                        <input type="text" id="tagInputField" placeholder="输入标签后按回车添加">
+                    </div>
+                    <p class="tip">支持多个标签，按回车添加</p>
+                </div>
             </div>
-            <div class="form-group">
-                <label data-i18n="admin.blogEdit.excerpt">Excerpt</label>
-                <textarea id="excerpt" placeholder="" rows="3"></textarea>
+        </div>
+
+        <div class="card">
+            <div class="card-header">文章内容</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <textarea id="content" placeholder="编写文章正文内容，支持HTML格式"></textarea>
+                    <p class="tip">支持 HTML 标签，如 &lt;h3&gt;、&lt;p&gt;、&lt;ul&gt;、&lt;li&gt;、&lt;strong&gt;、&lt;code&gt; 等</p>
+                </div>
             </div>
-            <div class="form-group">
-                <label data-i18n="admin.blogEdit.content">Content</label>
-                <textarea id="content" placeholder=""></textarea>
-                <div class="tip" data-i18n="admin.blogEdit.markdownTip">Supports Markdown syntax, you can use headings, lists, code blocks, etc.</div>
-            </div>
-            <div class="actions">
-                <button type="button" class="btn btn-secondary" onclick="saveDraft()" data-i18n="admin.blogEdit.saveDraft">Save Draft</button>
-                <button type="button" class="btn btn-primary" onclick="publishPost()" data-i18n="admin.blogEdit.publish">Publish</button>
-            </div>
-        </form>
+        </div>
+
+        <div class="actions">
+            <a href="blog-list.html" class="btn btn-secondary">取消</a>
+            <button class="btn btn-secondary" onclick="saveDraft()">保存草稿</button>
+            <button class="btn btn-primary" onclick="publish()">发布文章</button>
+        </div>
     </main>
 
     <script src="../js/storage.js"></script>
-    <script src="../js/i18n.js"></script>
     <script>
-        function switchLanguage(lang) {
-            setLanguage(lang);
-            translatePage();
-            updateLangButtons();
-            updatePlaceholders();
-        }
-
-        function updateLangButtons() {
-            const currentLang = getLanguage();
-            document.getElementById('lang-en').classList.toggle('active', currentLang === 'en');
-            document.getElementById('lang-zh').classList.toggle('active', currentLang === 'zh');
-            document.documentElement.lang = currentLang === 'zh' ? 'zh-CN' : 'en';
-        }
-
-        function updatePlaceholders() {
-            const lang = getLanguage();
-            document.getElementById('title').placeholder = lang === 'zh' ? '输入文章标题' : 'Enter article title';
-            document.getElementById('newTag').placeholder = lang === 'zh' ? '输入标签后回车' : 'Press enter after typing tag';
-            document.getElementById('excerpt').placeholder = lang === 'zh' ? '简要描述文章内容，用于列表展示和SEO' : 'Brief description of the article for list display and SEO';
-            document.getElementById('content').placeholder = lang === 'zh' ? '编写文章正文内容，支持Markdown格式' : 'Write article content, supports Markdown format';
-        }
-
         if (!Storage.isLoggedIn()) window.location.href = 'login.html';
 
-        let currentPostId = null;
+        let currentPost = null;
         let tags = [];
 
+        function getUrlParameter(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
         function init() {
-            const params = new URLSearchParams(window.location.search);
-            const id = params.get('id');
-            if (id) {
-                currentPostId = id;
-                const post = Storage.getPost(id);
-                if (post) {
-                    document.getElementById('pageTitle').textContent = getLanguage() === 'zh' ? '编辑文章' : 'Edit Article';
-                    document.getElementById('title').value = post.title;
-                    document.getElementById('category').value = post.category;
-                    document.getElementById('excerpt').value = post.excerpt || '';
-                    document.getElementById('content').value = post.content || '';
-                    tags = post.tags || [];
+            const postId = getUrlParameter('id');
+            if (postId) {
+                currentPost = Storage.getPost(postId);
+                if (currentPost) {
+                    document.getElementById('pageTitle').textContent = '编辑文章';
+                    document.getElementById('title').value = currentPost.title || '';
+                    document.getElementById('excerpt').value = currentPost.excerpt || '';
+                    document.getElementById('category').value = currentPost.category || '';
+                    document.getElementById('status').value = currentPost.status || 'draft';
+                    document.getElementById('content').value = currentPost.content || '';
+                    tags = currentPost.tags || [];
                     renderTags();
                 }
             }
         }
 
         function renderTags() {
-            const tagInput = document.getElementById('tagInput');
-            const newTagInput = document.getElementById('newTag');
-            tagInput.innerHTML = tags.map(tag => 
-                `<span class="tag-item">${tag}<span onclick="removeTag('${tag}')">&times;</span></span>`
-            ).join('');
-            tagInput.appendChild(newTagInput);
+            const container = document.getElementById('tagInput');
+            const input = document.getElementById('tagInputField');
+            container.innerHTML = tags.map((tag, index) => `
+                <span class="tag-item">
+                    ${tag}
+                    <button onclick="removeTag(${index})">×</button>
+                </span>
+            `).join('');
+            container.appendChild(input);
         }
 
-        function removeTag(tag) {
-            tags = tags.filter(t => t !== tag);
+        function addTag(tag) {
+            tag = tag.trim();
+            if (tag && !tags.includes(tag)) {
+                tags.push(tag);
+                renderTags();
+            }
+        }
+
+        function removeTag(index) {
+            tags.splice(index, 1);
             renderTags();
         }
 
-        document.getElementById('newTag').addEventListener('keypress', function(e) {
+        document.getElementById('tagInputField').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 e.preventDefault();
-                const value = this.value.trim();
-                if (value && !tags.includes(value)) {
-                    tags.push(value);
-                    renderTags();
-                    this.value = '';
-                }
+                addTag(this.value);
+                this.value = '';
             }
         });
 
-        function savePost(status) {
-            const lang = getLanguage();
-            const title = document.getElementById('title').value;
-            const category = document.getElementById('category').value;
-            const excerpt = document.getElementById('excerpt').value;
-            const content = document.getElementById('content').value;
+        function getFormData() {
+            return {
+                id: currentPost?.id,
+                title: document.getElementById('title').value,
+                excerpt: document.getElementById('excerpt').value,
+                content: document.getElementById('content').value,
+                category: document.getElementById('category').value,
+                tags: tags,
+                status: document.getElementById('status').value
+            };
+        }
 
+        function validateForm() {
+            const title = document.getElementById('title').value.trim();
+            const category = document.getElementById('category').value;
+            
             if (!title) {
-                alert(lang === 'zh' ? '请输入文章标题' : 'Please enter article title');
-                return;
+                alert('请输入文章标题');
+                return false;
             }
             if (!category) {
-                alert(lang === 'zh' ? '请选择分类' : 'Please select category');
-                return;
+                alert('请选择分类');
+                return false;
             }
-
-            const post = {
-                id: currentPostId,
-                title,
-                category,
-                excerpt,
-                content,
-                tags,
-                status
-            };
-
-            Storage.savePost(post);
-            alert(status === 'published' ? (lang === 'zh' ? '发布成功！' : 'Published successfully!') : (lang === 'zh' ? '草稿保存成功！' : 'Draft saved successfully!'));
-            window.location.href = 'blog-list.html';
+            return true;
         }
 
         function saveDraft() {
-            savePost('draft');
+            if (!validateForm()) return;
+            const post = getFormData();
+            post.status = 'draft';
+            Storage.savePost(post);
+            alert('草稿保存成功！');
+            window.location.href = 'blog-list.html';
         }
 
-        function publishPost() {
-            savePost('published');
+        function publish() {
+            if (!validateForm()) return;
+            const post = getFormData();
+            post.status = 'published';
+            Storage.savePost(post);
+            alert('发布成功！');
+            window.location.href = 'blog-list.html';
         }
 
         document.getElementById('logoutBtn').addEventListener('click', function() {
-            const lang = getLanguage();
-            if (confirm(lang === 'zh' ? '确定要退出登录吗？' : 'Are you sure you want to logout?')) {
+            if (confirm('确定要退出登录吗？')) {
                 Storage.logout();
                 window.location.href = 'login.html';
             }
         });
 
         init();
-        initLanguage();
-        updateLangButtons();
-        updatePlaceholders();
     </script>
 </body>
 </html>

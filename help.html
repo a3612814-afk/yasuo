@@ -406,6 +406,9 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
+            // 记录页面访问
+            Storage.recordPageView();
+            
             initLanguage();
             loadFriendLinks();
         });

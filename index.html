@@ -824,6 +824,12 @@
 
         function downloadImage() {
             if (!compressedBlob) return;
+            
+            // 记录压缩统计
+            if (originalSize > 0 && compressedSize > 0) {
+                Storage.recordCompression(originalSize, compressedSize);
+            }
+            
             const originalName = currentFile.name.split('.')[0];
             const format = formatSelect.value;
             const filename = `${originalName}_compressed.${format}`;
@@ -859,6 +865,9 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
+            // 记录页面访问
+            Storage.recordPageView();
+            
             initLanguage();
             loadFriendLinks();
         });
